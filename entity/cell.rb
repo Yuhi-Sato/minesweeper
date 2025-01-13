@@ -1,6 +1,4 @@
 class Cell
-  attr_accessor :neighbor_bomb_cell_count
-
   def initialize(bomb:)
     @bomb = bomb
     @flag = false
