@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
 
-require_relative 'cell'
-require_relative 'neighbor'
-require_relative 'board'
-require_relative 'finish_condition'
-require_relative 'minesweeper'
+require_relative '../entity/cell'
+require_relative '../entity/factory/cell_factory'
+require_relative '../entity/board'
+require_relative '../common/neighbor_coordination'
+require_relative '../minesweeper'
 
 def display_board(board)
   board.grid_cells.each_with_index do |row, y|
