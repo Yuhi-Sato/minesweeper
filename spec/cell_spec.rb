@@ -1,0 +1,79 @@
+require_relative '../entity/cell'
+
+RSpec.describe Cell do
+  describe '#bomb?' do
+    context '爆弾であるとき' do
+      let(:cell) { build(:cell, bomb: true) }
+
+      it 'trueを返すこと' do
+        expect(cell.bomb?).to eq true
+      end
+    end
+
+    context '爆弾でないとき' do
+      let(:cell) { build(:cell, bomb: false) }
+
+      it 'falseを返すこと' do
+        expect(cell.bomb?).to eq false
+      end
+    end
+  end
+
+  describe '#flag? と #toggle_flag の組み合わせ' do
+    context '初期状態のとき' do
+      let(:cell) { build(:cell) }
+
+      it 'falseを返すこと' do
+        expect(cell.flag?).to eq false
+      end
+    end
+
+    context 'フラグを立てたとき' do
+      let(:cell) { build(:cell) }
+
+      it 'trueを返すこと' do
+        cell.toggle_flag
+        expect(cell.flag?).to eq true
+      end
+    end
+
+    context 'フラグを立てた後に解除したとき' do
+      let(:cell) { build(:cell) }
+
+      it 'falseを返すこと' do
+        cell.toggle_flag
+        cell.toggle_flag
+        expect(cell.flag?).to eq false
+      end
+    end
+  end
+
+  describe '#revealed? と #reveal の組み合わせ' do
+    context '初期状態のとき' do
+      let(:cell) { build(:cell) }
+
+      it 'falseを返すこと' do
+        expect(cell.revealed?).to eq false
+      end
+    end
+
+    context 'セルを開いたとき' do
+      let(:cell) { build(:cell) }
+
+      it 'trueを返すこと' do
+        cell.reveal
+        expect(cell.revealed?).to eq true
+      end
+    end
+
+    context 'セルを開いた後に閉じたとき' do
+      let(:cell) { build(:cell) }
+
+      it 'falseを返すこと' do
+        cell.reveal
+        cell.reveal
+        expect(cell.revealed?).to eq true
+      end
+    end
+  end
+end
