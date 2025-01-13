@@ -2,7 +2,8 @@ class Minesweeper
   attr_reader :board
 
   def initialize(width:, height:, num_bombs:)
-    @board = Board.new(width:, height:, num_bombs:)
+    @board = Board.new(width:, height:, num_bombs:,
+      grid_cell_factory: GridCellFactory.new(width:, height:, num_bombs:))
     @finished = false
   end
 

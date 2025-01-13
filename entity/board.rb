@@ -1,11 +1,11 @@
 class Board
   attr_reader :num_empties, :grid_cells
 
-  def initialize(width:, height:, num_bombs:)
+  def initialize(width:, height:, num_bombs:, grid_cell_factory:)
     @num_cells = width * height
     @num_bombs = num_bombs
     @num_empties = calculate_num_empties
-    @grid_cells = GridCellFactory.new(width:, height:, num_bombs:).create_grid_cells
+    @grid_cells = grid_cell_factory.create_grid_cells
   end
 
   def reveal_cell(x:, y:)
