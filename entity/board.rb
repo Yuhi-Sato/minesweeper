@@ -1,9 +1,7 @@
 class Board
-  attr_reader :grid_cells, :with, :height, :num_cells, :num_bombs, :num_empties, :neighbor, :grid_cells
+  attr_reader :num_cells, :num_bombs, :num_empties, :grid_cells
 
   def initialize(width:, height:, num_bombs:)
-    @width = width
-    @height = height
     @num_cells = width * height
     @num_bombs = num_bombs
     @num_empties = num_cells - num_bombs
