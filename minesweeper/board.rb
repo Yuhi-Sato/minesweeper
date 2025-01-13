@@ -41,14 +41,4 @@ class Board
   def bombed?
     grid_cells.flatten.any? { |cell| cell.bomb? && cell.revealed? }
   end
-
-  def update_neighbor_revealed_cell_count
-    grid_cells.each_with_index do |row, y|
-      row.each_with_index do |cell, x|
-        cell.neighbor_revealed_cell_count = neighbor.coordinations(x:, y:).count do |nx, ny|
-          grid_cells[ny][nx].revealed?
-        end
-      end
-    end
-  end
 end

@@ -1,5 +1,5 @@
 class Cell
-  attr_accessor :neighbor_bomb_cell_count, :neighbor_revealed_cell_count
+  attr_accessor :neighbor_bomb_cell_count
 
   def initialize(bomb:)
     @bomb = bomb

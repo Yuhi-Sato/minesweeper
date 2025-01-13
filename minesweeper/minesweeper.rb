@@ -3,14 +3,12 @@ class Minesweeper
 
   def initialize(width:, height:, num_bombs:)
     @board = Board.new(width:, height:, num_bombs:)
-    @finish_condition = FinishCondition.new(board: @board)
     @finished = false
   end
 
   def reveal_cell(x, y)
     board.reveal_cell(x: x, y: y)
     check_finish_after_reveal
-    board.update_neighbor_revealed_cell_count
   end
 
   def toggle_flag(x, y)
@@ -24,6 +22,6 @@ class Minesweeper
   private
 
   def check_finish_after_reveal
-    @finished = finish_condition.check_after_reveal
+    @finished = board.bombed? || board.num_empties == board.count_revealed_cell
   end
 end
