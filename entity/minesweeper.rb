@@ -1,5 +1,5 @@
 class Minesweeper
-  attr_reader :board, :finish_condition
+  attr_reader :board
 
   def initialize(width:, height:, num_bombs:)
     @board = Board.new(width:, height:, num_bombs:)
