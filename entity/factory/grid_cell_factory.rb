@@ -3,11 +3,11 @@ class GridCellFactory
   DX = [0, 1, 1, 1, 0, -1, -1, -1]
   DY = [-1, -1, 0, 1, 1, 1, 0, -1]
 
-  def initialize(num_cells:, num_bombs:, width:)
-    @num_cells = num_cells
-    @num_bombs = num_bombs
+  def initialize(width:, height:, num_bombs:)
     @width = width
-    @height = num_cells / width
+    @height = height
+    @num_cells = width * height
+    @num_bombs = num_bombs
   end
 
   def create_grid_cells
