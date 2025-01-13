@@ -1,10 +1,14 @@
 class CellWithNeighbors < Cell
-  attr_reader :neighbors, :neighbor_bomb_cell_count
+  attr_reader :neighbor_bomb_cell_count
 
   def initialize(bomb:, neighbors: [])
     super(bomb:)
     @neighbors = neighbors
     @neighbor_bomb_cell_count = count_neighbor_bomb_cell
+  end
+
+  def neighbors
+    @neighbors.dup
   end
 
   def add_neighbor(neighbor:)
