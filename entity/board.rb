@@ -4,7 +4,7 @@ class Board
   def initialize(num_cells:, num_bombs:, grid_cell_factory:)
     @num_cells = num_cells
     @num_bombs = num_bombs
-    @num_empties = num_empties
+    @num_empties = calculate_num_empties
     @grid_cells = grid_cell_factory.create_grid_cells
   end
 
@@ -26,7 +26,7 @@ class Board
 
   private
 
-  def num_empties
+  def calculate_num_empties
     @num_cells - @num_bombs
   end
 end
