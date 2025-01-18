@@ -1,31 +1,11 @@
 #!/usr/bin/env ruby
 
-require_relative '../entity/cell'
-require_relative '../entity/cell_with_neighbors'
-require_relative '../entity/factory/grid_cell_factory'
-require_relative '../entity/board'
-require_relative '../entity/minesweeper'
-
-def display_board(board)
-  board.grid_cells.each_with_index do |row, y|
-    row.each_with_index do |cell, x|
-      if cell.revealed?
-        if cell.bomb?
-          print "B "
-        else
-          print "#{cell.neighbor_bomb_cell_count} "
-        end
-      else
-        if cell.flag?
-          print "F "
-        else
-          print "□ "
-        end
-      end
-    end
-    puts
-  end
-end
+require_relative '../domains/cell'
+require_relative '../domains/cell_with_neighbors'
+require_relative '../domains/position'
+require_relative '../domains/grid_cells'
+require_relative '../domains/board'
+require_relative '../domains/minesweeper'
 
 def prompt_command
   print "\nコマンドを入力してください（例: reveal 2 3 / flag 1 1 / exit）: "
@@ -54,7 +34,7 @@ if __FILE__ == $0
   # ゲームが続く限りループ
   until game.finished?
     # 盤面表示
-    display_board(game.board)
+    game.board.display
 
     # ユーザーのコマンド入力
     input = prompt_command
@@ -86,7 +66,7 @@ if __FILE__ == $0
     # ゲーム終了チェック
     if game.finished?
       puts "\nゲーム終了！"
-      display_board(game.board)
+      game.board.display
       if game.board.bombed?
         puts "爆弾を開いてしまいました…"
       else
