@@ -6,13 +6,13 @@ class GridCells
   DX = [0, 1, 1, 1, 0, -1, -1, -1]
   DY = [-1, -1, 0, 1, 1, 1, 0, -1]
 
-  def initialize(width:, height:, num_bombs:)
+  def initialize(width: 9, height: 9, num_bombs: 10)
     @width = width
     @height = height
     @num_cells = width * height
     @num_bombs = num_bombs
     @num_empties = @num_cells - @num_bombs
-    @data = create_grid_cells
+    @data = create_data
   end
 
   def reveal_with_neighbors(position:)
@@ -33,24 +33,23 @@ class GridCells
 
   private
 
-  # TODO: Builder Patternを実装する
-  def create_grid_cells
+  # NOTE: ランダムにセルを生成するメソッド
+  def create_data
     cells = Array.new(@num_bombs) { CellWithNeighbors.new(bomb: true) } +
             Array.new(@num_cells - @num_bombs) {  CellWithNeighbors.new(bomb: false) }
 
-    grid_cells = cells.shuffle.each_slice(@width).to_a
+    data = cells.shuffle.each_slice(@width).to_a
 
-    grid_cells.each_with_index do |row, y|
+    data.each_with_index do |row, y|
       row.each_with_index do |cell, x|
         coordinations(x:, y:).each do |nx, ny|
-          cell.add_neighbor(neighbor: grid_cells[ny][nx])
+          cell.add_neighbor(neighbor: data[ny][nx])
         end
       end
     end
 
-    grid_cells
+    data
   end
-
 
   def coordinations(x:, y:)
     NUM_NEIGHBORS.times.map { |i| [x + DX[i], y + DY[i]] }
