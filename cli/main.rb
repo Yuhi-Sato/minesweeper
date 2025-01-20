@@ -13,57 +13,50 @@ def prompt_command
 end
 
 def parse_command(input)
-  # 例: "reveal 2 3" → ["reveal", "2", "3"]
   input.split
 end
 
 if __FILE__ == $0
-  # ゲーム設定の入力 (任意で固定値でもOK)
-  print "幅を入力してください (width): "
-  width = gets.to_i
+  # TODO: モードでwidth, height, num_bombsを変更する
+  # print "幅を入力してください (width): "
+  # width = gets.to_i
 
-  print "高さを入力してください (height): "
-  height = gets.to_i
+  # print "高さを入力してください (height): "
+  # height = gets.to_i
 
-  print "地雷の数を入力してください (num_bombs): "
-  num_bombs = gets.to_i
+  # print "地雷の数を入力してください (num_bombs): "
+  # num_bombs = gets.to_i
 
-  # Minesweeperクラスを初期化
-  game = Minesweeper.new(width:, height:, num_bombs:)
+  game = Minesweeper.new(width: 9, height: 9, num_bombs: 10)
 
-  # ゲームが続く限りループ
   until game.finished?
-    # 盤面表示
     game.board.display
 
-    # ユーザーのコマンド入力
     input = prompt_command
     command, x_str, y_str = parse_command(input)
 
-    # コマンド別の処理
     case command
-    when "reveal"
+    when "reveal", "r"
       if x_str && y_str
         x, y = x_str.to_i, y_str.to_i
         game.reveal_cell(x, y)
       else
         puts "座標が正しくありません。例: 'reveal 2 3'"
       end
-    when "flag"
+    when "flag", "f"
       if x_str && y_str
         x, y = x_str.to_i, y_str.to_i
         game.toggle_flag(x, y)
       else
         puts "座標が正しくありません。例: 'flag 1 1'"
       end
-    when "exit"
+    when "exit", "e"
       puts "ゲームを終了します。"
       exit
     else
       puts "不明なコマンドです。'reveal x y', 'flag x y', 'exit'を使用してください。"
     end
 
-    # ゲーム終了チェック
     if game.finished?
       puts "\nゲーム終了！"
       game.board.display
