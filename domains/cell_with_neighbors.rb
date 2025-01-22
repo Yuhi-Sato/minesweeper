@@ -13,10 +13,6 @@ class CellWithNeighbors
 
   def_delegators :@base, :bomb?, :flag?, :toggle_flag, :revealed?, :reveal
 
-  def reveal
-    @base.reveal
-  end
-
   def neighbors
     @neighbors.dup
   end
