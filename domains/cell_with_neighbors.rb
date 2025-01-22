@@ -1,4 +1,8 @@
+require 'forwardable'
+
 class CellWithNeighbors
+  extend Forwardable
+
   attr_reader :neighbor_bomb_cell_count
 
   def initialize(base:, neighbors: [])
@@ -7,21 +11,7 @@ class CellWithNeighbors
     @neighbor_bomb_cell_count = count_neighbor_bomb_cell
   end
 
-  def bomb?
-    @base.bomb?
-  end
-
-  def flag?
-    @base.flag?
-  end
-
-  def toggle_flag
-    @base.toggle_flag
-  end
-
-  def revealed?
-    @base.revealed?
-  end
+  def_delegators :@base, :bomb?, :flag?, :toggle_flag, :revealed?, :reveal
 
   def reveal
     @base.reveal
