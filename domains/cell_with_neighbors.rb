@@ -1,10 +1,30 @@
-class CellWithNeighbors < Cell
+class CellWithNeighbors
   attr_reader :neighbor_bomb_cell_count
 
-  def initialize(bomb:, neighbors: [])
-    super(bomb:)
+  def initialize(base:, neighbors: [])
+    @base = base
     @neighbors = neighbors
     @neighbor_bomb_cell_count = count_neighbor_bomb_cell
+  end
+
+  def bomb?
+    @base.bomb?
+  end
+
+  def flag?
+    @base.flag?
+  end
+
+  def toggle_flag
+    @base.toggle_flag
+  end
+
+  def revealed?
+    @base.revealed?
+  end
+
+  def reveal
+    @base.reveal
   end
 
   def neighbors

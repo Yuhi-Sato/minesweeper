@@ -35,8 +35,8 @@ class GridCells
 
   # NOTE: ランダムにセルを生成するメソッド
   def create_data
-    cells = Array.new(@num_bombs) { CellWithNeighbors.new(bomb: true) } +
-            Array.new(@num_cells - @num_bombs) {  CellWithNeighbors.new(bomb: false) }
+    cells = Array.new(@num_bombs) { CellWithNeighbors.new(base: Cell.new(bomb: true)) } +
+            Array.new(@num_cells - @num_bombs) {  CellWithNeighbors.new(base: Cell.new(bomb: false)) }
 
     data = cells.shuffle.each_slice(@width).to_a
 
