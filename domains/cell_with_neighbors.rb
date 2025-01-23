@@ -22,10 +22,6 @@ class CellWithNeighbors
     @neighbor_bomb_cell_count += 1 if neighbor.bomb?
   end
 
-  def count_revealed_cell
-    neighbors.count(&:revealed?)
-  end
-
   def reveal_with_neighbors
     # NOTE: 再帰処理の終了条件
     return if revealed?
@@ -38,6 +34,10 @@ class CellWithNeighbors
     if neighbor_bomb_cell_count.zero?
       neighbors.each(&:reveal_with_neighbors)
     end
+  end
+
+  def count_revealed_cell
+    neighbors.count(&:revealed?)
   end
 
   private
