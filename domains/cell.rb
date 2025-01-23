@@ -13,12 +13,12 @@ class Cell
     @flag
   end
 
-  def toggle_flag
-    @flag = !@flag
-  end
-
   def revealed?
     @revealed
+  end
+
+  def toggle_flag
+    @flag = !@flag
   end
 
   def reveal

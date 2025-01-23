@@ -11,7 +11,7 @@ class CellWithNeighbors
     @neighbor_bomb_cell_count = count_neighbor_bomb_cell
   end
 
-  def_delegators :@base, :bomb?, :flag?, :toggle_flag, :revealed?, :reveal
+  def_delegators :@base, :bomb?, :flag?, :revealed?, :toggle_flag, :reveal
 
   def neighbors
     @neighbors.dup
