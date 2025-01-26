@@ -1,4 +1,3 @@
-# TODO: このクラスを抽象クラスとして、2次元と3次元の具象クラスに分割する
 class GridCells
   attr_reader :data, :num_empties
 
@@ -12,7 +11,7 @@ class GridCells
     @num_cells = width * height
     @num_bombs = num_bombs
     @num_empties = @num_cells - @num_bombs
-    @data = create_data
+    @data = build_data
   end
 
   def reveal_with_neighbors(position:)
@@ -34,7 +33,7 @@ class GridCells
   private
 
   # NOTE: ランダムにセルを生成するメソッド
-  def create_data
+  def build_data
     cells = Array.new(@num_bombs) { CellWithNeighbors.new(base: Cell.new(bomb: true)) } +
             Array.new(@num_cells - @num_bombs) {  CellWithNeighbors.new(base: Cell.new(bomb: false)) }
 

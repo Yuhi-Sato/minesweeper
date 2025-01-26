@@ -1,4 +1,4 @@
-require_relative '../entity/cell'
+require_relative '../domains/cell'
 
 RSpec.describe Cell do
   describe '#bomb?' do

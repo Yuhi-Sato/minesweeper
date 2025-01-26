@@ -1,4 +1,4 @@
-require_relative '../entity/cell_with_neighbors'
+require_relative '../domains/cell_with_neighbors'
 
 RSpec.describe CellWithNeighbors do
   describe '#initialize' do
