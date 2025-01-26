@@ -25,43 +25,6 @@ class Board
 
   # TODO: 別クラスに実装する
   def display
-    print "  "
-
-    @grid_cells.data.first.each_with_index do |row, x|
-      print "#{x} "
-    end
-
-    puts
-
-    print "  "
-
-    @grid_cells.data.first.each do |row, x|
-      print "--"
-    end
-
-    puts
-
-    @grid_cells.data.each_with_index do |row, y|
-      print "#{y}|"
-
-      row.each do |cell|
-        if cell.revealed?
-          if cell.bomb?
-            print "B "
-          elsif cell.count_revealed_cell == cell.neighbors.size
-            print "◻︎ "
-          else
-            print "#{cell.neighbor_bomb_cell_count} "
-          end
-        else
-          if cell.flag?
-            print "F "
-          else
-            print "◼︎ "
-          end
-        end
-      end
-      puts
-    end
+    @grid_cells.display
   end
 end

@@ -1,5 +1,5 @@
 class GridCells
-  attr_reader :data, :num_empties
+  attr_reader :num_empties
 
   NUM_NEIGHBORS = 8
   DX = [0, 1, 1, 1, 0, -1, -1, -1]
@@ -15,19 +15,61 @@ class GridCells
   end
 
   def reveal_with_neighbors(position:)
-    data[position.y][position.x].reveal_with_neighbors
+    @data[position.y][position.x].reveal_with_neighbors
   end
 
   def toggle_flag(position:)
-    data[position.y][position.x].toggle_flag
+    @data[position.y][position.x].toggle_flag
   end
 
   def count_revealed_cell
-    data.flatten.count(&:revealed?)
+    @data.flatten.count(&:revealed?)
   end
 
   def bombed?
-    data.flatten.any? { |cell| cell.bomb? && cell.revealed? }
+    @data.flatten.any? { |cell| cell.bomb? && cell.revealed? }
+  end
+
+  # TODO: 別クラスに実装する
+  def display
+    print "  "
+
+    @data.first.each_with_index do |row, x|
+      print "#{x} "
+    end
+
+    puts
+
+    print "  "
+
+    @data.first.each do |row, x|
+      print "--"
+    end
+
+    puts
+
+    @data.each_with_index do |row, y|
+      print "#{y}|"
+
+      row.each do |cell|
+        if cell.revealed?
+          if cell.bomb?
+            print "B "
+          elsif cell.count_revealed_cell == cell.neighbors.size
+            print "◻︎ "
+          else
+            print "#{cell.neighbor_bomb_cell_count} "
+          end
+        else
+          if cell.flag?
+            print "F "
+          else
+            print "◼︎ "
+          end
+        end
+      end
+      puts
+    end
   end
 
   private
