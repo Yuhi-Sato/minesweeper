@@ -4,6 +4,7 @@ require_relative '../domains/cell'
 require_relative '../domains/cell_with_neighbors'
 require_relative '../domains/position'
 require_relative '../domains/grid_cells'
+require_relative '../domains/grid_cells_creator'
 require_relative '../domains/board'
 require_relative '../domains/minesweeper'
 
@@ -17,17 +18,7 @@ def parse_command(input)
 end
 
 if __FILE__ == $0
-  # TODO: モードでwidth, height, num_bombsを変更する
-  # print "幅を入力してください (width): "
-  # width = gets.to_i
-
-  # print "高さを入力してください (height): "
-  # height = gets.to_i
-
-  # print "地雷の数を入力してください (num_bombs): "
-  # num_bombs = gets.to_i
-
-  game = Minesweeper.new(width: 9, height: 9, num_bombs: 10)
+  game = Minesweeper.new
 
   until game.finished?
     game.board.display
