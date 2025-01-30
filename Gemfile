@@ -6,3 +6,4 @@ source "https://rubygems.org"
 gem 'rspec'
 
 gem "factory_bot", "~> 6.5"
+gem 'simplecov', require: false, group: :test

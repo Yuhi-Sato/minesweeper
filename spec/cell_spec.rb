@@ -19,6 +19,24 @@ RSpec.describe Cell do
     end
   end
 
+  describe '#empty?' do
+    context '爆弾であるとき' do
+      let(:cell) { build(:cell, bomb: true) }
+
+      it 'falseを返すこと' do
+        expect(cell.empty?).to eq false
+      end
+    end
+
+    context '爆弾でないとき' do
+      let(:cell) { build(:cell, bomb: false) }
+
+      it 'trueを返すこと' do
+        expect(cell.empty?).to eq true
+      end
+    end
+  end
+
   describe '#flag? と #toggle_flag の組み合わせ' do
     context '初期状態のとき' do
       let(:cell) { build(:cell) }

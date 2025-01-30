@@ -38,7 +38,7 @@ RSpec.describe CellWithNeighbors do
 
   describe '#add_neighbor' do
     let(:cell_with_neighbors) { build(:cell_with_neighbors, neighbors: []) }
-    let(:neighbor_bomb) { build(:cell_with_neighbors, bomb: true) }
+    let(:neighbor_bomb) { build(:cell, bomb: true) }
 
     it 'neighborが追加されること' do
       cell_with_neighbors.add_neighbor(neighbor: neighbor_bomb)
@@ -94,7 +94,8 @@ RSpec.describe CellWithNeighbors do
 
     context 'セルが爆弾のとき' do
       let(:neighbors) { Array.new(8) { build(:cell_with_neighbors) } }
-      let(:cell_with_neighbors) { build(:cell_with_neighbors, bomb: true) }
+      let(:bomb_cell) { build(:cell, bomb: true) }
+      let(:cell_with_neighbors) { build(:cell_with_neighbors, base: bomb_cell) }
 
       it 'セルを開くこと' do
         cell_with_neighbors.reveal_with_neighbors
@@ -110,13 +111,14 @@ RSpec.describe CellWithNeighbors do
     end
 
     context 'セルが爆弾でない かつ 隣接する爆弾が0個のとき' do
+      let(:empty_cell) { build(:cell, bomb: false) }
       let(:neighbors) do
         Array.new(8) do
-          deep_neighbors = Array.new(8) { build(:cell_with_neighbors, bomb: false, neighbors: []) }
-          build(:cell_with_neighbors, bomb: false, neighbors: deep_neighbors)
+          deep_neighbors = Array.new(8) { build(:cell_with_neighbors, base: empty_cell, neighbors: []) }
+          build(:cell_with_neighbors, base: empty_cell, neighbors: deep_neighbors)
         end
       end
-      let(:cell_with_neighbors) { build(:cell_with_neighbors, bomb: false, neighbors:) }
+      let(:cell_with_neighbors) { build(:cell_with_neighbors, base: empty_cell, neighbors:) }
 
       it '隣接するセルを開くこと' do
         cell_with_neighbors.reveal_with_neighbors
@@ -138,9 +140,11 @@ RSpec.describe CellWithNeighbors do
     end
 
     context 'セルが爆弾でない かつ 隣接する爆弾が1個以上のとき' do
-      let(:bomb_neighbor) { build(:cell_with_neighbors, bomb: true) }
+      let(:empty_cell) { build(:cell, bomb: false) }
+      let(:bomb_cell) { build(:cell, bomb: true) }
+      let(:bomb_neighbor) { build(:cell_with_neighbors, base: bomb_cell) }
       let(:neighbors) { Array.new(7) { build(:cell_with_neighbors) } + [bomb_neighbor] }
-      let(:cell_with_neighbors) { build(:cell_with_neighbors, bomb: false, neighbors:) }
+      let(:cell_with_neighbors) { build(:cell_with_neighbors, base: empty_cell, neighbors:) }
 
       it '隣接するセルを開かないこと' do
         cell_with_neighbors.reveal_with_neighbors
