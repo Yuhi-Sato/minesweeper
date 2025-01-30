@@ -9,6 +9,10 @@ class Cell
     @bomb
   end
 
+  def empty?
+    !@bomb
+  end
+
   def flag?
     @flag
   end
