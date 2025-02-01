@@ -1,8 +1,10 @@
-class Position
-  attr_reader :x, :y
+module Domains
+  class Position < Base
+    attr_reader :x, :y
 
-  def initialize(x:, y:)
-    @x = x
-    @y = y
+    def initialize(x:, y:)
+      @x = x
+      @y = y
+    end
   end
 end

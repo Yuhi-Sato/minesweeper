@@ -1,27 +1,29 @@
-class Minesweeper
-  attr_reader :board
+module Domains
+  class Minesweeper < Base
+    attr_reader :board
 
-  def initialize
-    @board = Board.new(grid_cells: GridCellsCreator.create)
-    @finished = false
-  end
+    def initialize
+      @board = Board.new(grid_cells: GridCellsCreator.create)
+      @finished = false
+    end
 
-  def reveal_cell(x, y)
-    board.reveal_cell(position: Position.new(x:, y:))
-    check_finish_after_reveal
-  end
+    def reveal_cell(x, y)
+      board.reveal_cell(position: Position.new(x:, y:))
+      check_finish_after_reveal
+    end
 
-  def toggle_flag(x, y)
-    board.toggle_flag(position: Position.new(x:, y:))
-  end
+    def toggle_flag(x, y)
+      board.toggle_flag(position: Position.new(x:, y:))
+    end
 
-  def finished?
-    @finished
-  end
+    def finished?
+      @finished
+    end
 
-  private
+    private
 
-  def check_finish_after_reveal
-    @finished = board.bombed? || board.num_empties == board.count_revealed_cell
+    def check_finish_after_reveal
+      @finished = board.bombed? || board.num_empties == board.count_revealed_cell
+    end
   end
 end
