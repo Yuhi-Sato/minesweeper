@@ -48,7 +48,7 @@ module Domains
           if cell.revealed?
             if cell.bomb?
               print "B "
-            elsif cell.count_revealed_cell == cell.neighbors.size
+            elsif cell.neighbor_bomb_cell_count == 0 || cell.count_revealed_cell == cell.neighbors.size
               print "◻︎ "
             else
               print "#{cell.neighbor_bomb_cell_count} "
