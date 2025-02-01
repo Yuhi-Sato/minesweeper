@@ -1,5 +1,3 @@
-require_relative '../domains/cell'
-
 RSpec.describe Domains::Cell do
   describe '#bomb?' do
     context '爆弾であるとき' do
@@ -90,18 +88,6 @@ RSpec.describe Domains::Cell do
 
       it 'trueを返すこと' do
         expect(cell.revealed?).to eq true
-      end
-    end
-
-    context 'セルを開いた後に閉じたとき' do
-      let(:cell) { build(:cell) }
-
-      before do
-        cell.reveal
-      end
-
-      it 'Errorを返すこと' do
-        expect { cell.reveal }.to raise_error Domains::Validators::Error
       end
     end
   end

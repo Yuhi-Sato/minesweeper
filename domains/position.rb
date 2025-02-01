@@ -6,5 +6,7 @@ module Domains
       @x = x
       @y = y
     end
+
+    with_validation :initialize
   end
 end

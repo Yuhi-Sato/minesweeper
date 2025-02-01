@@ -1,5 +1,3 @@
-require_relative '../domains/position'
-
 RSpec.describe Domains::Position do
   describe '#x' do
     let(:x) { rand(0..100) }

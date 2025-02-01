@@ -1,5 +1,3 @@
-require_relative '../domains/cell_with_neighbors'
-
 RSpec.describe Domains::CellWithNeighbors do
   describe '#initialize' do
     context '隣接する爆弾が0個のとき' do
