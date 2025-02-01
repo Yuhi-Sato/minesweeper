@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :cell do
+  factory :cell, class: Domains::Cell do
     bomb { [true, false].sample }
 
     initialize_with do

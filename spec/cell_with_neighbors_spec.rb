@@ -1,6 +1,6 @@
 require_relative '../domains/cell_with_neighbors'
 
-RSpec.describe CellWithNeighbors do
+RSpec.describe Domains::CellWithNeighbors do
   describe '#initialize' do
     context '隣接する爆弾が0個のとき' do
       let(:cell_with_neighbors) { build(:cell_with_neighbors, neighbors: []) }
@@ -76,22 +76,6 @@ RSpec.describe CellWithNeighbors do
   end
 
   describe '#reveal_with_neighbors' do
-    context 'セルが既に開かれているとき' do
-      let(:neighbors) { Array.new(8) { build(:cell_with_neighbors) } }
-      let(:cell_with_neighbors) { build(:cell_with_neighbors) }
-
-      before do
-        cell_with_neighbors.reveal
-      end
-
-      it '隣接するセルを開かないこと' do
-        cell_with_neighbors.reveal_with_neighbors
-        neighbors.each do |neighbor|
-          expect(neighbor.revealed?).to eq false
-        end
-      end
-    end
-
     context 'セルが爆弾のとき' do
       let(:neighbors) { Array.new(8) { build(:cell_with_neighbors) } }
       let(:bomb_cell) { build(:cell, bomb: true) }

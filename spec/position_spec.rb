@@ -1,6 +1,6 @@
 require_relative '../domains/position'
 
-RSpec.describe Position do
+RSpec.describe Domains::Position do
   describe '#x' do
     let(:x) { rand(0..100) }
     let(:position) { build(:position, x:) }

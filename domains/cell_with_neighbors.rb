@@ -26,14 +26,13 @@ module Domains
     def reveal_with_neighbors
       reveal
 
-      # NOTE: 再帰処理の終了条件
-      return if revealed?
-
       # NOTE: 選択したセルが爆弾の場合は再帰処理を終了
       return if bomb?
 
       if neighbor_bomb_cell_count.zero?
-        neighbors.each(&:reveal_with_neighbors)
+        neighbors.each do |neighbor|
+          neighbor.reveal_with_neighbors unless neighbor.revealed?
+        end
       end
     end
 

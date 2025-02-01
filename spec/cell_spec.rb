@@ -1,6 +1,6 @@
 require_relative '../domains/cell'
 
-RSpec.describe Cell do
+RSpec.describe Domains::Cell do
   describe '#bomb?' do
     context '爆弾であるとき' do
       let(:cell) { build(:cell, bomb: true) }
@@ -49,18 +49,24 @@ RSpec.describe Cell do
     context 'フラグを立てたとき' do
       let(:cell) { build(:cell) }
 
-      it 'trueを返すこと' do
+      before do
         cell.toggle_flag
+      end
+
+      it 'trueを返すこと' do
         expect(cell.flag?).to eq true
       end
     end
 
-    context 'フラグを立てた後に解除したとき' do
+    context 'フラグを立てた後にフラグを解除したとき' do
       let(:cell) { build(:cell) }
 
+      before do
+        cell.toggle_flag
+        cell.toggle_flag
+      end
+
       it 'falseを返すこと' do
-        cell.toggle_flag
-        cell.toggle_flag
         expect(cell.flag?).to eq false
       end
     end
@@ -78,8 +84,11 @@ RSpec.describe Cell do
     context 'セルを開いたとき' do
       let(:cell) { build(:cell) }
 
-      it 'trueを返すこと' do
+      before do
         cell.reveal
+      end
+
+      it 'trueを返すこと' do
         expect(cell.revealed?).to eq true
       end
     end
@@ -87,10 +96,12 @@ RSpec.describe Cell do
     context 'セルを開いた後に閉じたとき' do
       let(:cell) { build(:cell) }
 
-      it 'falseを返すこと' do
+      before do
         cell.reveal
-        cell.reveal
-        expect(cell.revealed?).to eq true
+      end
+
+      it 'Errorを返すこと' do
+        expect { cell.reveal }.to raise_error Domains::Validators::Error
       end
     end
   end
