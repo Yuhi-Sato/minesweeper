@@ -1,6 +1,6 @@
 module Domains
   class GridCells < Base
-    attr_reader :num_empties
+    attr_reader :data, :num_empties
 
     def initialize(data:)
       @data = data
@@ -64,6 +64,8 @@ module Domains
         puts
       end
     end
+
+    with_validation :reveal_with_neighbors, :toggle_flag
 
     private
 
