@@ -20,7 +20,7 @@ module Domains
         method_names.each do |method_name|
           method_name = method_name.to_sym if method_name.is_a?(String)
 
-          unless method_defined?(method_name)
+          unless method_defined?(method_name) || method_name == :initialize
             raise NotImplementedError, "#{self}##{method_name} must be implemented"
           end
 
@@ -32,10 +32,10 @@ module Domains
           class_eval do
             alias_method "original_#{method_name}", method_name
 
-            define_method(method_name) do |*args, &block|
+            define_method(method_name) do |*args, **kwargs, &block|
               validator = self.class.validator_class.new(self)
-              validator.send(validate_method_name, *args)
-              send("original_#{method_name}", *args, &block)
+              validator.send(validate_method_name, *args, **kwargs)
+              send("original_#{method_name}", *args, **kwargs, &block)
             end
           end
         end
