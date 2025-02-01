@@ -1,12 +1,13 @@
 #!/usr/bin/env ruby
 
-require_relative '../domains/cell'
-require_relative '../domains/cell_with_neighbors'
-require_relative '../domains/position'
-require_relative '../domains/grid_cells'
-require_relative '../domains/grid_cells_creator'
-require_relative '../domains/board'
-require_relative '../domains/minesweeper'
+Dir.glob(File.expand_path('../domains/validators/*.rb', __dir__)).sort.each do |file|
+  require file
+end
+
+Dir.glob(File.expand_path('../domains/*.rb', __dir__)).sort.each do |file|
+  require file
+end
+
 
 def prompt_command
   print "\nコマンドを入力してください（例: reveal 2 3 / flag 1 1 / exit）: "
@@ -18,7 +19,7 @@ def parse_command(input)
 end
 
 if __FILE__ == $0
-  game = Minesweeper.new
+  game = Domains::Minesweeper.new
 
   until game.finished?
     game.board.display
