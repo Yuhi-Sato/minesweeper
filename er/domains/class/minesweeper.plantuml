@@ -1,0 +1,15 @@
+@startuml
+
+class Minesweeper {
+    - board: Board
+    - finished: Boolean
+    --
+    + new
+    + board: Board
+    + reveal_cell(x: Integer, y: Integer): void
+    + toggle_flag(x: Integer, y: Integer): void
+    + finished?: Boolean
+    - check_finish_after_reveal: void
+}
+
+@enduml

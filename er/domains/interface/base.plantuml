@@ -1,0 +1,13 @@
+@startuml
+
+interface base {
+    --
+    + bomb?: Boolean
+    + empty?: Boolean
+    + flag?: Boolean
+    + revealed?: Boolean
+    + toggle_flag: void
+    + reveal: void
+}
+
+@enduml

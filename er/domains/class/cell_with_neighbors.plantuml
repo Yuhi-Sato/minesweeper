@@ -1,0 +1,17 @@
+@startuml
+
+class CellWithNeighbors {
+    - base: base
+    - neighbors: Array<neighbor>
+    - neighbor_bomb_cell_count: Integer
+    --
+    + new(base: base, neighbors: Array<neighbor>)
+    + neighbor_bomb_cell_count: Integer
+    + neighbors: Array<neighbor>
+    + add_neighbor(neighbor: neighbor): void
+    + reveal_with_neighbors: void
+    + count_revealed_cell: Integer
+    - count_neighbor_bomb_cell: Integer
+}
+
+@enduml

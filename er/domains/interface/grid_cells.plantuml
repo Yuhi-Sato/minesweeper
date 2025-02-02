@@ -1,0 +1,13 @@
+@startuml 
+
+interface grid_cells {
+    --
+    + reveal_with_neighbors(position: position): void
+    + toggle_flag(position: position): void
+    + count_revealed_cell: Integer
+    + bombed?: Boolean
+    + num_empties: Integer
+    + display: void
+}
+
+@enduml

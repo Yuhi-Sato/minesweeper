@@ -1,0 +1,11 @@
+@startuml 
+
+interface neighbor {
+    --
+    + bomb?: Boolean
+    + empty?: Boolean
+    + revealed?: Boolean
+    + reveal_with_neighbors: void
+}
+
+@enduml

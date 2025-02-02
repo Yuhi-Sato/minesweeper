@@ -1,0 +1,12 @@
+@startuml
+
+class Position {
+    - x: Integer
+    - y: Integer
+    --
+    + new(x: Integer, y: Integer)
+    + x: Integer
+    + y: Integer
+}
+
+@enduml

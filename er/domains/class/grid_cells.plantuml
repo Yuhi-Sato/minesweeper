@@ -1,0 +1,18 @@
+@startuml
+
+class GridCells {
+    - data: Array<Array<CellWithNeighbors>>
+    - num_empties: Integer
+    --
+    + new(data: Array<Array<CellWithNeighbors>>)
+    + data: Array<Array<CellWithNeighbors>>
+    + num_empties: Integer
+    + reveal_with_neighbors(position: position): void
+    + toggle_flag(position: position): void
+    + count_revealed_cell: Integer
+    + bombed?: Boolean
+    + display: void
+    - count_empty_cell: Integer
+}
+
+@enduml

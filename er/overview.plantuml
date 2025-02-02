@@ -1,0 +1,46 @@
+@startuml
+
+top to bottom direction
+
+skinparam defaultFontName HackGen
+
+skinparam linetype ortho
+
+!include domains/class/minesweeper.plantuml
+!include domains/class/board.plantuml
+!include domains/class/grid_cells_creator.plantuml
+!include domains/class/grid_cells.plantuml
+!include domains/class/cell_with_neighbors.plantuml
+!include domains/class/position.plantuml
+!include domains/class/cell.plantuml
+
+!include domains/interface/grid_cells.plantuml
+!include domains/interface/neighbor.plantuml
+!include domains/interface/position.plantuml
+!include domains/interface/base.plantuml
+
+Minesweeper --> Board
+Minesweeper --> GridCellsCreator
+Minesweeper --> Position
+
+Board --> grid_cells
+Board --> position
+Board .d[hidden].> GridCells
+
+GridCellsCreator --> Cell
+GridCellsCreator "生成" --> CellWithNeighbors
+
+GridCells -r-> position
+GridCells .l[hidden].> grid_cells
+
+grid_cells --> position
+
+Position .l[hidden].> position
+
+CellWithNeighbors --> base
+CellWithNeighbors -r-> neighbor
+CellWithNeighbors .d[hidden].> Cell
+
+Cell .r[hidden].> base
+
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+
+class Cell {
+    - bomb: Boolean
+    - flag: Boolean
+    - revealed: Boolean
+    --
+    + new(bomb: Boolean)
+    + bomb?: Boolean
+    + empty?: Boolean
+    + flag?: Boolean
+    + revealed?: Boolean
+    + toggle_flag: void
+    + reveal: void
+}
+
+@enduml
