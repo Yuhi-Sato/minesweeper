@@ -1,19 +1,46 @@
-name: generate plantuml
-on: push
+name: Generate PlantUML images
+
+on:
+  push:
+    paths:
+      - 'er/**/*.plantuml'
+  pull_request:
+    paths:
+      - 'er/**/*.plantuml'
+
+permissions:
+  contents: write 
+
 jobs:
-  generate_plantuml:
+  generate-images:
     runs-on: ubuntu-latest
-    name: plantuml
+
     steps:
-    - name: checkout
-      uses: actions/checkout@v1
-      with:
-        fetch-depth: 1
-    - name: plantuml
-      id: plantuml
-      uses: grassedge/generate-plantuml-action@v1.5
-      with:
-        path: images
-        message: "Render PlantUML files"
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check out repository
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: 11
+      - name: Install PlantUML
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y plantuml
+      - name: Generate UML diagrams
+        run: |
+          java -jar plantuml.jar -tpng -charset UTF-8 ../er/**/*.plantuml -o ../images
+      - name: Commit diagram images
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            git add images
+            git commit -m "Update UML diagrams"
+            git push
+          else
+            echo "No changes to commit."
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
