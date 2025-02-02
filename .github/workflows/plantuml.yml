@@ -27,7 +27,7 @@ jobs:
           sudo apt-get install -y plantuml
       - name: Generate UML diagrams
         run: |
-          java -jar plantuml.jar -tpng -charset UTF-8 diagrams/**/*.plantuml -o images
+          plantuml -tpng -charset UTF-8 diagrams/**/*.plantuml -o images
       - name: Commit diagram images
         run: |
           git config user.name "github-actions"
