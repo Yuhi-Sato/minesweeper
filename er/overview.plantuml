@@ -6,18 +6,18 @@ skinparam defaultFontName HackGen
 
 skinparam linetype ortho
 
-!include domains/class/minesweeper.plantuml
-!include domains/class/board.plantuml
-!include domains/class/grid_cells_creator.plantuml
-!include domains/class/grid_cells.plantuml
-!include domains/class/cell_with_neighbors.plantuml
-!include domains/class/position.plantuml
-!include domains/class/cell.plantuml
+!include domains/class/minesweeper_class.plantuml
+!include domains/class/board_class.plantuml
+!include domains/class/grid_cells_creator_class.plantuml
+!include domains/class/grid_cells_class.plantuml
+!include domains/class/cell_with_neighbors_class.plantuml
+!include domains/class/position_class.plantuml
+!include domains/class/cell_class.plantuml
 
-!include domains/interface/grid_cells.plantuml
-!include domains/interface/neighbor.plantuml
-!include domains/interface/position.plantuml
-!include domains/interface/base.plantuml
+!include domains/interface/grid_cells_interface.plantuml
+!include domains/interface/neighbor_interface.plantuml
+!include domains/interface/position_interface.plantuml
+!include domains/interface/base_interface.plantuml
 
 Minesweeper --> Board
 Minesweeper --> GridCellsCreator
