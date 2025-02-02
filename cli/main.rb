@@ -4,7 +4,7 @@ Dir.glob(File.expand_path('../domains/validators/*.rb', __dir__)).sort.each do |
   require file
 end
 
-Dir.glob(File.expand_path('../domains/*.rb', __dir__)).sort.each do |file|
+Dir.glob(File.expand_path('../domains/**/*.rb', __dir__)).sort.each do |file|
   require file
 end
 
@@ -19,7 +19,21 @@ def parse_command(input)
 end
 
 if __FILE__ == $0
-  game = Domains::Minesweeper.new
+  puts "難易度を選択してください。"
+  puts "1: 簡単"
+  puts "2: 普通"
+  puts "3: 難しい"
+
+  difficulty = case gets.chomp
+                when "1"
+                  :easy
+                when "2"
+                  :normal
+                when "3"
+                  :hard
+  end
+
+  game = Domains::Minesweeper.new(difficulty)
 
   until game.finished?
     begin
