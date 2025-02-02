@@ -1,4 +1,4 @@
-@startuml
+@startuml Minesweeper Class
 
 class Minesweeper {
     - board: Board

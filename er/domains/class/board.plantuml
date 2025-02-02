@@ -1,4 +1,4 @@
-@startuml
+@startuml Board Class
 
 class Board {
     - grid_cells: GridCells
