@@ -1,4 +1,4 @@
-@startuml GridCells Class
+@startuml grid_cells_class
 
 class GridCells {
     - data: Array<Array<CellWithNeighbors>>

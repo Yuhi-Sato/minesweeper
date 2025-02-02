@@ -1,4 +1,4 @@
-@startuml GridCellsCreator Class
+@startuml grid_cells_creator_class
 
 class GridCellsCreator {
     {static} NUM_NEIGHBORS: Integer = 8

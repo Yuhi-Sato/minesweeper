@@ -1,4 +1,4 @@
-@startuml Cell Class
+@startuml cell_class
 
 class Cell {
     - bomb: Boolean

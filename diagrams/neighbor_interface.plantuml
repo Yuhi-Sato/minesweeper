@@ -1,4 +1,4 @@
-@startuml Neighbor Interface
+@startuml neighbor_interface
 
 interface neighbor {
     --

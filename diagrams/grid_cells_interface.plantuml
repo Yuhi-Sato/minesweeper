@@ -1,4 +1,4 @@
-@startuml GridCells Interface
+@startuml grid_cells_interface
 
 interface grid_cells {
     --

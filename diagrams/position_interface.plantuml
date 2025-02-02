@@ -1,4 +1,4 @@
-@startuml Position Interface
+@startuml position_interface
 
 interface position {
     --

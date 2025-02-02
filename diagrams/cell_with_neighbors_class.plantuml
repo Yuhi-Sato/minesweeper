@@ -1,4 +1,4 @@
-@startuml CellWithNeighbors Class
+@startuml cell_with_neighbors_class
 
 class CellWithNeighbors {
     - base: base
