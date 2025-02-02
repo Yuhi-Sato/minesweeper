@@ -3,7 +3,8 @@ name: Generate PlantUML images
 on:
   push:
     paths:
-      - 'diagrams/**/*.plantuml'
+      branches: [ main ]
+    #   - 'diagrams/**/*.plantuml'
 permissions:
   contents: write 
 jobs:
