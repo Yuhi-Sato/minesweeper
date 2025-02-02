@@ -13,6 +13,7 @@ skinparam linetype ortho
 !include domains/class/cell_with_neighbors_class.plantuml
 !include domains/class/position_class.plantuml
 !include domains/class/cell_class.plantuml
+
 !include domains/interface/grid_cells_interface.plantuml
 !include domains/interface/neighbor_interface.plantuml
 !include domains/interface/position_interface.plantuml
