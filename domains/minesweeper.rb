@@ -2,9 +2,12 @@ module Domains
   class Minesweeper < Base
     attr_reader :board
 
+    EASY = :easy
+    NORMAL = :normal
+    HARD = :hard
+
     def initialize(difficulty)
-      grid_cells_creator = get_grid_cells_creator(difficulty)
-      @board = Board.new(grid_cells: grid_cells_creator.create)
+      @board = Board.new(difficulty:)
       @finished = false
     end
 
@@ -22,17 +25,6 @@ module Domains
     end
 
     private
-
-    def get_grid_cells_creator(difficulty)
-      case difficulty
-      when :easy
-        GridCellsCreators::Easy.new
-      when :normal
-        GridCellsCreators::Normal.new
-      when :hard
-        GridCellsCreators::Hard.new
-      end
-    end
 
     def check_finish_after_reveal
       @finished = board.bombed? || board.num_empties == board.count_revealed_cell

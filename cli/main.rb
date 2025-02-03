@@ -26,11 +26,11 @@ if __FILE__ == $0
 
   difficulty = case gets.chomp
                 when "1"
-                  :easy
+                  Domains::Minesweeper::EASY
                 when "2"
-                  :normal
+                  Domains::Minesweeper::NORMAL
                 when "3"
-                  :hard
+                  Domains::Minesweeper::HARD
   end
 
   game = Domains::Minesweeper.new(difficulty)
