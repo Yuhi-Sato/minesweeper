@@ -1,8 +1,6 @@
 module Domains
   class Base
     class << self
-      attr_accessor :validator_class
-
       def inherited(subclass)
         subclass_name = subclass.to_s.split('::').last
         validator_class_name = "::Domains::Validators::#{subclass_name}Validator"
@@ -13,7 +11,11 @@ module Domains
           validator_class = Validators::Base
         end
 
-        subclass.validator_class = validator_class
+        subclass.instance_variable_set("@validator_class", validator_class)
+
+        def subclass.validator_class
+          @validator_class
+        end
       end
 
       def with_validation(*method_names)

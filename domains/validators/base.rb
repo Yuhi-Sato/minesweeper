@@ -2,6 +2,7 @@ module Domains
   module Validators
     class Base
       attr_reader :object, :errors
+
       def initialize(domain_object)
         @object = domain_object
         @errors = Errors.new
