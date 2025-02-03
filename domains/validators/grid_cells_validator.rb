@@ -5,7 +5,7 @@ module Domains
         if position.y.negative? || position.x.negative?
           errors.add("Cannot reveal position out of range")
         end
-        if position.y >= object.data.length || position.x >= object.data[position.y].length
+        if position.y >= object.height || position.x >= object.width
           errors.add("Cannot reveal position out of range")
         end
         raise Error, errors.full_messages unless errors.empty?
@@ -15,7 +15,7 @@ module Domains
         if position.y.negative? || position.x.negative?
           errors.add("Cannot reveal position out of range")
         end
-        if position.y >= object.data.length || position.x >= object.data[position.y].length
+        if position.y >= object.height || position.x >= object.width
           errors.add("Cannot reveal position out of range")
         end
         raise Error, errors.full_messages unless errors.empty?

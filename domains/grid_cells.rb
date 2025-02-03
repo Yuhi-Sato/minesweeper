@@ -1,6 +1,6 @@
 module Domains
   class GridCells < Base
-    attr_reader :data, :num_empties
+    attr_reader :num_empties
 
     def initialize(data:)
       @data = data
@@ -21,6 +21,14 @@ module Domains
 
     def bombed?
       @data.flatten.any? { |cell| cell.bomb? && cell.revealed? }
+    end
+
+    def width
+      @data.first.size
+    end
+
+    def height
+      @data.size
     end
 
     # TODO: 別クラスに実装する
