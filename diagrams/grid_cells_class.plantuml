@@ -11,6 +11,8 @@ class GridCells {
     + toggle_flag(position: position): void
     + count_revealed_cell: Integer
     + bombed?: Boolean
+    + width: Integer
+    + height: Integer
     + display: void
     - count_empty_cell: Integer
 }
