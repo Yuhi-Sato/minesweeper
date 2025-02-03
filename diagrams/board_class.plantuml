@@ -3,13 +3,14 @@
 class Board {
     - grid_cells: GridCells
     --
-    + new(grid_cells: grid_ells)
+    + new(difficulty: Symbol)
     + reveal_cell(position: position): void
     + toggle_flag(position: position): void
     + count_revealed_cell: Integer
     + bombed?: Boolean
     + num_empties: Integer
     + display: void
+    - grid_cells_creator(difficulty: Symbol): GridCellsCreator
 }
 
 @enduml

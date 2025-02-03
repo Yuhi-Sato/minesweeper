@@ -4,7 +4,11 @@ class Minesweeper {
     - board: Board
     - finished: Boolean
     --
-    + new
+    {static} EASY: Symbol
+    {static} NORMAL: Symbol
+    {static} HARD: Symbol
+    --
+    + new(difficulty: Symbol)
     + board: Board
     + reveal_cell(x: Integer, y: Integer): void
     + toggle_flag(x: Integer, y: Integer): void
