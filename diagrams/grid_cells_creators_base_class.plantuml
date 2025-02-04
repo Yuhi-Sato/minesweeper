@@ -2,7 +2,7 @@
 
 class GridCellsCreators::Base {
     --
-    - create: void
+    + create: void
 }
 
 @enduml

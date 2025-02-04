@@ -6,7 +6,7 @@ class GridCellsCreators::Normal {
     {static} HEIGHT = 9
     {static} NUM_BOMBS = 10
     --
-    - create: GridCells
+    + create: GridCells
 }
 
 @enduml 

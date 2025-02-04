@@ -6,7 +6,7 @@ class GridCellsCreators::Easy {
     {static} HEIGHT = 5
     {static} NUM_BOMBS = 5
     --
-    - create: GridCells
+    + create: GridCells
 }
 
 @enduml 
