@@ -1,4 +1,4 @@
-@startuml grid_cells_creator_normal_class
+@startuml grid_cells_creators_normal_class
 
 class GridCellsCreators::Normal {
     --

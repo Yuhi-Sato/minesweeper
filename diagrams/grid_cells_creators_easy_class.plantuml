@@ -1,4 +1,4 @@
-@startuml grid_cells_creator_easy_class
+@startuml grid_cells_creators_easy_class
 
 class GridCellsCreators::Easy {
     --
