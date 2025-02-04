@@ -1,0 +1,27 @@
+@startuml overview
+
+top to bottom direction
+
+skinparam defaultFontName HackGen
+
+skinparam linetype ortho
+
+!include grid_cells_class.plantuml
+!include grid_cells_creators_utils_class.plantuml
+!include cell_with_neighbors_class.plantuml
+!include cell_class.plantuml
+
+!include neighbor_interface.plantuml
+!include base_interface.plantuml
+
+GridCellsCreators::Utils --> Cell
+GridCellsCreators::Utils --> CellWithNeighbors
+GridCellsCreators::Utils --> GridCells
+
+CellWithNeighbors --> neighbor
+CellWithNeighbors ..|> neighbor
+CellWithNeighbors --> base
+
+Cell ..|> base
+
+@enduml

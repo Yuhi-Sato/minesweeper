@@ -1,0 +1,12 @@
+@startuml grid_cells_creator_normal_class
+
+class GridCellsCreators::Normal {
+    --
+    {static} WIDTH = 9
+    {static} HEIGHT = 9
+    {static} NUM_BOMBS = 10
+    --
+    - create: GridCells
+}
+
+@enduml 

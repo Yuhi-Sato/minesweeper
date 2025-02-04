@@ -5,7 +5,6 @@ class GridCells {
     - num_empties: Integer
     --
     + new(data: Array<Array<CellWithNeighbors>>)
-    + data: Array<Array<CellWithNeighbors>>
     + num_empties: Integer
     + reveal_with_neighbors(position: position): void
     + toggle_flag(position: position): void

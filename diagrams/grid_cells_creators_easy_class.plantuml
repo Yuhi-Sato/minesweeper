@@ -1,0 +1,12 @@
+@startuml grid_cells_creator_easy_class
+
+class GridCellsCreators::Easy {
+    --
+    {static} WIDTH = 5
+    {static} HEIGHT = 5
+    {static} NUM_BOMBS = 5
+    --
+    - create: GridCells
+}
+
+@enduml 

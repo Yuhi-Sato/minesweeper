@@ -1,0 +1,13 @@
+@startuml grid_cells_creator_utils_class
+
+class GridCellsCreators::Utils {
+    --
+    {static} NUM_NEIGHBORS = 8
+    {static} DX = [0, 1, 1, 1, 0, -1, -1, -1]
+    {static} DY = [-1, -1, 0, 1, 1, 1, 0, -1]
+    --
+    {static} random_create(width: Integer, height: Integer, num_bombs: Integer): GridCells
+    {static} coordinations(x: Integer, y: Integer, width: Integer, height: Integer): Array<Array<Integer>>
+}
+
+@enduml 

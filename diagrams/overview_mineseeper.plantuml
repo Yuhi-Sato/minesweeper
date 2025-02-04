@@ -1,0 +1,55 @@
+@startuml overview
+
+top to bottom direction
+
+skinparam defaultFontName HackGen
+
+skinparam linetype ortho
+
+!include minesweeper_class.plantuml
+!include board_class.plantuml
+!include grid_cells_class.plantuml
+!include position_class.plantuml
+
+!include grid_cells_creators_base_class.plantuml
+!include grid_cells_creators_easy_class.plantuml
+!include grid_cells_creators_normal_class.plantuml
+!include grid_cells_creators_hard_class.plantuml
+!include grid_cells_creators_utils_class.plantuml
+
+!include grid_cells_creator_interface.plantuml
+!include grid_cells_interface.plantuml
+!include position_interface.plantuml
+
+Minesweeper --> Board
+Minesweeper --> Position
+
+Board --> grid_cells_creator
+Board --> grid_cells
+Board --> position
+Board --> GridCellsCreators::Easy
+Board --> GridCellsCreators::Normal
+Board --> GridCellsCreators::Hard
+
+grid_cells_creator --> GridCells
+
+GridCells ..|> grid_cells
+
+GridCellsCreators::Base ..|> grid_cells_creator
+
+GridCellsCreators::Easy --|> GridCellsCreators::Base
+GridCellsCreators::Easy --> GridCellsCreators::Utils
+
+GridCellsCreators::Normal --|> GridCellsCreators::Base
+GridCellsCreators::Normal --> GridCellsCreators::Utils
+
+GridCellsCreators::Hard --|> GridCellsCreators::Base
+GridCellsCreators::Hard --> GridCellsCreators::Utils
+
+GridCells -r-> position
+
+grid_cells --> position
+
+Position ..|> position
+
+@enduml

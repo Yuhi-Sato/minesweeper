@@ -1,0 +1,8 @@
+@startuml grid_cells_creator_interface
+
+interface grid_cells_creator {
+    --
+    {static} create: GridCells
+}
+
+@enduml
