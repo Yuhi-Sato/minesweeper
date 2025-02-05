@@ -7,7 +7,7 @@ module Domains
     HARD = :hard
 
     def initialize(difficulty)
-      @board = Board.new(difficulty:)
+      @board = Board.new(difficulty)
       @finished = false
     end
 

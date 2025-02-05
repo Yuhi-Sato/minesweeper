@@ -1,8 +1,0 @@
-@startuml grid_cells_creators_base_class
-
-class GridCellsCreators::Base {
-    --
-    + create: void
-}
-
-@enduml

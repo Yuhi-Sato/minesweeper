@@ -1,11 +1,12 @@
-@startuml grid_cells_creators_utils_class
+@startuml grid_cells_factory_class
 
-class GridCellsCreators::Utils {
+class GridCellsFactory {
     --
     {static} NUM_NEIGHBORS = 8
     {static} DX = [0, 1, 1, 1, 0, -1, -1, -1]
     {static} DY = [-1, -1, 0, 1, 1, 1, 0, -1]
     --
+    {static} create(difficulty: Symbol): GridCells
     {static} random_create(width: Integer, height: Integer, num_bombs: Integer): GridCells
     {static} coordinations(x: Integer, y: Integer, width: Integer, height: Integer): Array<Array<Integer>>
 }

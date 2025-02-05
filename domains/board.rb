@@ -1,7 +1,7 @@
 module Domains
   class Board < Base
-    def initialize(difficulty:)
-      @grid_cells = grid_cells_creator(difficulty).create
+    def initialize(difficulty)
+      @grid_cells = GridCellsFactory.create(difficulty)
     end
 
     def reveal_cell(position:)
@@ -27,21 +27,6 @@ module Domains
     # TODO: 別クラスに実装する
     def display
       @grid_cells.display
-    end
-
-    private
-
-    def grid_cells_creator(difficulty)
-      case difficulty
-      when Minesweeper::EASY
-        GridCellsCreators::Easy.new
-      when Minesweeper::NORMAL
-        GridCellsCreators::Normal.new
-      when Minesweeper::HARD
-        GridCellsCreators::Hard.new
-      else
-        raise "Invalid difficulty: #{difficulty}"
-      end
     end
   end
 end
