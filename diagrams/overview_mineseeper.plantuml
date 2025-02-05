@@ -22,6 +22,8 @@ Board --> grid_cells
 Board --> position
 Board --> GridCellsFactory
 
+GridCellsFactory --> GridCells
+
 GridCells ..|> grid_cells
 GridCells --> position
 
