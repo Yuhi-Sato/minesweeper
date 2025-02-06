@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Domains
   class Position < Base
     attr_reader :x, :y

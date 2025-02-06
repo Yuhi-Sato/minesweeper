@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Domains
   module Validators
     class Base
@@ -23,14 +25,14 @@ module Domains
       end
 
       def full_messages
-        @errors.join(", ")
+        @errors.join(', ')
       end
     end
 
     class Error < StandardError
       def initialize(errors)
         @errors = errors
-        message = errors.is_a?(Array) ? errors.join(", ") : errors.to_s
+        message = errors.is_a?(Array) ? errors.join(', ') : errors.to_s
         super(message)
       end
     end

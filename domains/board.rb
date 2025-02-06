@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Domains
   class Board < Base
     def initialize(difficulty)

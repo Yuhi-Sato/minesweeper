@@ -8,7 +8,6 @@ Dir.glob(File.expand_path('../domains/**/*.rb', __dir__)).sort.each do |file|
   require file
 end
 
-
 def prompt_command
   print "\nコマンドを入力してください（例: reveal 2 3 / flag 1 1 / exit）: "
   gets.chomp
@@ -19,19 +18,19 @@ def parse_command(input)
 end
 
 if __FILE__ == $0
-  puts "難易度を選択してください。"
-  puts "1: 簡単"
-  puts "2: 普通"
-  puts "3: 難しい"
+  puts '難易度を選択してください。'
+  puts '1: 簡単'
+  puts '2: 普通'
+  puts '3: 難しい'
 
   difficulty = case gets.chomp
-                when "1"
-                  Domains::Minesweeper::EASY
-                when "2"
-                  Domains::Minesweeper::NORMAL
-                when "3"
-                  Domains::Minesweeper::HARD
-  end
+               when '1'
+                 Domains::Minesweeper::EASY
+               when '2'
+                 Domains::Minesweeper::NORMAL
+               when '3'
+                 Domains::Minesweeper::HARD
+               end
 
   game = Domains::Minesweeper.new(difficulty)
 
@@ -43,22 +42,24 @@ if __FILE__ == $0
       command, x_str, y_str = parse_command(input)
 
       case command
-      when "reveal", "r"
+      when 'reveal', 'r'
         if x_str && y_str
-          x, y = x_str.to_i, y_str.to_i
+          x = x_str.to_i
+          y = y_str.to_i
           game.reveal_cell(x, y)
         else
           puts "座標が正しくありません。例: 'reveal 2 3'"
         end
-      when "flag", "f"
+      when 'flag', 'f'
         if x_str && y_str
-          x, y = x_str.to_i, y_str.to_i
+          x = x_str.to_i
+          y = y_str.to_i
           game.toggle_flag(x, y)
         else
           puts "座標が正しくありません。例: 'flag 1 1'"
         end
-      when "exit", "e"
-        puts "ゲームを終了します。"
+      when 'exit', 'e'
+        puts 'ゲームを終了します。'
         exit
       else
         puts "不明なコマンドです。'reveal x y', 'flag x y', 'exit'を使用してください。"
@@ -68,14 +69,14 @@ if __FILE__ == $0
         puts "\nゲーム終了！"
         game.board.display
         if game.board.bombed?
-          puts "爆弾を開いてしまいました…"
+          puts '爆弾を開いてしまいました…'
         else
-          puts "おめでとうございます！地雷を回避して全てのセルを開きました！"
+          puts 'おめでとうございます！地雷を回避して全てのセルを開きました！'
         end
         break
       end
-    rescue
-      puts "エラーが発生しました。もう一度入力してください。"
+    rescue StandardError => e
+      puts e.message
     end
   end
 end

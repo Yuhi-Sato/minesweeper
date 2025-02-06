@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'forwardable'
 
 module Domains
@@ -29,10 +31,11 @@ module Domains
       # NOTE: 選択したセルが爆弾の場合は再帰処理を終了
       return if bomb?
 
-      if neighbor_bomb_cell_count.zero?
-        neighbors.each do |neighbor|
-          neighbor.reveal_with_neighbors unless neighbor.revealed?
-        end
+      # NOTE: 隣接したセルに爆弾がある場合は再帰処理を終了
+      return unless neighbor_bomb_cell_count.zero?
+
+      neighbors.each do |neighbor|
+        neighbor.reveal_with_neighbors unless neighbor.revealed?
       end
     end
 

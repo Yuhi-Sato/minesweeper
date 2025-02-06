@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module Domains
   module GridCellsFactory
     NUM_NEIGHBORS = 8
-    DX = [0, 1, 1, 1, 0, -1, -1, -1]
-    DY = [-1, -1, 0, 1, 1, 1, 0, -1]
+    DX = [0, 1, 1, 1, 0, -1, -1, -1].freeze
+    DY = [-1, -1, 0, 1, 1, 1, 0, -1].freeze
 
     class << self
       def create(difficulty)
@@ -39,7 +41,7 @@ module Domains
 
       def coordinations(x:, y:, width:, height:)
         NUM_NEIGHBORS.times.map { |i| [x + DX[i], y + DY[i]] }
-          .select { |nx, ny| nx.between?(0, width - 1) && ny.between?(0, height - 1) }
+                     .select { |nx, ny| nx.between?(0, width - 1) && ny.between?(0, height - 1) }
       end
     end
   end

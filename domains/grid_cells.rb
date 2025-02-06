@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Domains
   class GridCells < Base
     attr_reader :num_empties
@@ -33,18 +35,18 @@ module Domains
 
     # TODO: 別クラスに実装する
     def display
-      print "  "
+      print '  '
 
-      @data.first.each_with_index do |row, x|
+      @data.first.each_with_index do |_row, x|
         print "#{x} "
       end
 
       puts
 
-      print "  "
+      print '  '
 
-      @data.first.each do |row, x|
-        print "--"
+      @data.first.each do |_row, _x|
+        print '--'
       end
 
       puts
@@ -55,18 +57,16 @@ module Domains
         row.each do |cell|
           if cell.revealed?
             if cell.bomb?
-              print "B "
+              print 'B '
             elsif cell.neighbor_bomb_cell_count == 0 || cell.count_revealed_cell == cell.neighbors.size
-              print "◻︎ "
+              print '◻︎ '
             else
               print "#{cell.neighbor_bomb_cell_count} "
             end
+          elsif cell.flag?
+            print 'F '
           else
-            if cell.flag?
-              print "F "
-            else
-              print "◼︎ "
-            end
+            print '◼︎ '
           end
         end
         puts

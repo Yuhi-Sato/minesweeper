@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Domains
   class Cell < Base
     def initialize(bomb:)
