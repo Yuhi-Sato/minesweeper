@@ -1,0 +1,40 @@
+@startuml overview
+
+top to bottom direction
+
+skinparam defaultFontName HackGen
+
+skinparam linetype ortho
+
+interface grid_cells {}
+interface position {}
+interface neighbor {}
+interface base {}
+
+Minesweeper --> Board
+Minesweeper --> Position
+
+Board --> grid_cells
+Board --> position
+Board --> GridCellsFactory
+
+GridCellsFactory --> GridCells
+
+GridCells ..|> grid_cells
+GridCells --> position
+
+grid_cells --> position
+
+Position ..|> position
+
+GridCellsFactory --> Cell
+GridCellsFactory --> CellWithNeighbors
+GridCellsFactory --> GridCells
+
+CellWithNeighbors --> neighbor
+CellWithNeighbors ..|> neighbor
+CellWithNeighbors --> base
+
+Cell ..|> base
+
+@enduml
