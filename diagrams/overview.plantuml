@@ -13,6 +13,7 @@ interface base {}
 
 Minesweeper --> Position
 Minesweeper --> GridCellsFactory
+Minesweeper --> grid_cells
 
 GridCellsFactory --> GridCells
 

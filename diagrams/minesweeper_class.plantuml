@@ -1,7 +1,7 @@
 @startuml minesweeper_class
 
 class Minesweeper {
-    - board: Board
+    - grid_cells: GridCells
     - finished: Boolean
     --
     {static} EASY: Symbol
@@ -9,7 +9,7 @@ class Minesweeper {
     {static} HARD: Symbol
     --
     + new(difficulty: Symbol)
-    + board: Board
+    + grid_cells: GridCells
     + reveal_cell(x: Integer, y: Integer): void
     + toggle_flag(x: Integer, y: Integer): void
     + finished?: Boolean
