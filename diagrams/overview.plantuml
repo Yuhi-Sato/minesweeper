@@ -11,12 +11,7 @@ interface position {}
 interface neighbor {}
 interface base {}
 
-Minesweeper --> Board
 Minesweeper --> Position
-
-Board --> grid_cells
-Board --> position
-Board --> GridCellsFactory
 
 GridCellsFactory --> GridCells
 

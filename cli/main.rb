@@ -37,7 +37,7 @@ if __FILE__ == $PROGRAM_NAME
 
   until game.finished?
     begin
-      game.board.display
+      game.grid_cells.display
 
       input = prompt_command
       command, x_str, y_str = parse_command(input)
@@ -68,8 +68,8 @@ if __FILE__ == $PROGRAM_NAME
 
       if game.finished?
         puts "\nゲーム終了！"
-        game.board.display
-        if game.board.bombed?
+        game.grid_cells.display
+        if game.grid_cells.bombed?
           puts '爆弾を開いてしまいました…'
         else
           puts 'おめでとうございます！地雷を回避して全てのセルを開きました！'

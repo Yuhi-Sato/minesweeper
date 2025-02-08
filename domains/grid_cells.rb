@@ -9,7 +9,7 @@ module Domains
       @num_empties = count_empty_cell
     end
 
-    def reveal_with_neighbors(position:)
+    def reveal_cell(position:)
       @cells[position.y][position.x].reveal_with_neighbors
     end
 
@@ -73,7 +73,7 @@ module Domains
       end
     end
 
-    with_validation :reveal_with_neighbors, :toggle_flag
+    with_validation :reveal_cell, :toggle_flag
 
     private
 
