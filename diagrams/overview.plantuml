@@ -12,6 +12,7 @@ interface neighbor {}
 interface base {}
 
 Minesweeper --> Position
+Minesweeper --> GridCells
 
 GridCellsFactory --> GridCells
 
