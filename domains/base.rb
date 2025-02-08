@@ -35,8 +35,6 @@ module Domains
       end
     end
 
-    private
-
     def self.define_validator_class(subclass)
       subclass_name = subclass.to_s.split('::').last
       validator_class_name = "::Domains::Validators::#{subclass_name}Validator"

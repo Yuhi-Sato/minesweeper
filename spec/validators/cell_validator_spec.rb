@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Domains::Validators::CellValidator do
   describe '#validate_toggle_flag!' do
     context 'セルが既に開かれているとき' do

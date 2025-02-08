@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 Dir.glob(File.expand_path('../domains/validators/*.rb', __dir__)).sort.each do |file|
   require file
@@ -17,7 +18,7 @@ def parse_command(input)
   input.split
 end
 
-if __FILE__ == $0
+if __FILE__ == $PROGRAM_NAME
   puts '難易度を選択してください。'
   puts '1: 簡単'
   puts '2: 普通'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :position, class: Domains::Position do
     x { rand(0..100) }

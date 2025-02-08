@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :cell_with_neighbors, class: Domains::CellWithNeighbors do
     base { build(:cell) }

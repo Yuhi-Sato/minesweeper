@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Domains::Cell do
   describe '#bomb?' do
     context '爆弾であるとき' do

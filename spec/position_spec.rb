@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Domains::Position do
   describe '#x' do
     let(:x) { rand(0..100) }
