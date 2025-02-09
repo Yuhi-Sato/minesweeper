@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Minesweeper</title>
+  <style>
+    /* html, body を中央に配置するためのスタイル */
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;    /* 横方向中央揃え */
+      justify-content: center; /* 縦方向中央揃え */
+      font-family: sans-serif;
+    }
+    
+    /* ゲーム盤のテーブルなどのスタイル */
+    table {
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    td {
+      width: 30px;
+      height: 30px;
+      border: 1px solid #999;
+      text-align: center;
+      vertical-align: middle;
+      cursor: pointer;
+      user-select: none;
+      font-size: 16px;
+    }
+    td.revealed { background-color: #ddd; }
+    td.bomb { background-color: red; }
+    td.flagged { background-color: yellow; }
+    
+    /* その他の UI 部品 */
+    #difficulty-selection { margin-bottom: 20px; }
+    #message { font-size: 18px; margin-top: 10px; color: blue; }
+  </style>
+</head>
+<body>
+  <!-- 難易度選択用UI -->
+  <div id="difficulty-selection">
+    <h2>難易度を選択してください</h2>
+    <button data-difficulty="easy">簡単</button>
+    <button data-difficulty="normal">普通</button>
+    <button data-difficulty="hard">難しい</button>
+  </div>
+
+  <!-- ゲーム盤を表示する領域 -->
+  <div id="game-container" style="display: none;">
+    <div id="game"></div>
+  </div>
+
+  <!-- ゲーム終了時のメッセージ表示 -->
+  <div id="message"></div>
+
+  <script type="module">
+    /******************************************************************
+     * Ruby WASM の読み込み
+     ******************************************************************/
+    import { DefaultRubyVM } from "https://cdn.jsdelivr.net/npm/@ruby/wasm-wasi@2.7.1/dist/browser/+esm";
+
+    // Ruby+stdlib.wasm の取得とコンパイル
+    const response = await fetch("https://cdn.jsdelivr.net/npm/@ruby/3.4-wasm-wasi@2.7.1/dist/ruby+stdlib.wasm");
+    const module = await WebAssembly.compileStreaming(response);
+    const { vm } = await DefaultRubyVM(module);
+
+    /******************************************************************
+     * Ruby ファイルの読み込み（各ファイルを HTTP 経由で取得して vm.eval で評価）
+     ******************************************************************/
+    async function loadRubyFile(path) {
+      try {
+        const res = await fetch(path);
+        if (!res.ok) {
+          console.error(`Failed to load ${path}: ${res.status} ${res.statusText}`);
+          return;
+        }
+        const source = await res.text();
+        console.log(`Loaded ${path}`);
+        vm.eval(source);
+      } catch (e) {
+        console.error(`Error loading ${path}:`, e);
+      }
+    }
+
+    // 読み込む Ruby ファイル群
+    const rubyFiles = [
+      "domains/validators/base.rb",
+      "domains/validators/cell_validator.rb",
+      "domains/validators/grid_cells_validator.rb",
+      "domains/validators/position_validator.rb",
+      "domains/base.rb",
+      "domains/cell_with_neighbors.rb",
+      "domains/cell.rb",
+      "domains/grid_cells_factory.rb",
+      "domains/grid_cells.rb",
+      "domains/position.rb",
+      "domains/minesweeper.rb"
+    ];
+
+    for (const path of rubyFiles) {
+      console.log(`Loading ${path}...`);
+      await loadRubyFile(path);
+    }
+
+    // ★ JSON ライブラリの読み込み（Ruby 側で JSON を利用できるようにする）
+    vm.eval("require 'json'");
+
+    /******************************************************************
+     * UI およびゲームロジック
+     ******************************************************************/
+    const difficultySelectionDiv = document.getElementById("difficulty-selection");
+    const gameContainer = document.getElementById("game-container");
+    const gameDiv = document.getElementById("game");
+    const messageDiv = document.getElementById("message");
+
+    // 難易度選択後、Ruby 側で Minesweeper インスタンスを生成し、盤面を構築する
+    function startGame(difficulty) {
+      // Ruby 側で Minesweeper のインスタンスを生成
+      vm.eval(`$game = Domains::Minesweeper.new(:${difficulty})`);
+
+      // 難易度選択UIを非表示、ゲーム盤エリアを表示
+      difficultySelectionDiv.style.display = "none";
+      gameContainer.style.display = "block";
+
+      // Ruby 側から盤面のサイズを取得（整数に変換）
+      const gridWidth = parseInt(vm.eval("($game.grid_cells.width).to_i"));
+      const gridHeight = parseInt(vm.eval("($game.grid_cells.height).to_i"));
+      console.log("Grid size:", gridWidth, gridHeight);
+
+      // テーブル要素を生成して各セルにクリックイベントを設定
+      const table = document.createElement("table");
+      table.id = "game-table";
+      for (let y = 0; y < gridHeight; y++) {
+        const tr = document.createElement("tr");
+        for (let x = 0; x < gridWidth; x++) {
+          const td = document.createElement("td");
+          td.dataset.x = x;
+          td.dataset.y = y;
+          td.addEventListener("click", () => {
+            revealCell(x, y);
+          });
+          td.addEventListener("contextmenu", (e) => {
+            e.preventDefault();
+            toggleFlag(x, y);
+          });
+          tr.appendChild(td);
+        }
+        table.appendChild(tr);
+      }
+      gameDiv.innerHTML = "";
+      gameDiv.appendChild(table);
+
+      // 初期状態の盤面を更新
+      updateGridUI();
+    }
+
+    // Ruby 側の盤面状態を JSON 化して取得し、UI の各セルに反映する
+    function updateGridUI() {
+      // Ruby 側で $game.grid_cells.to_a が各セルの状態（x, y, revealed, flagged, bomb, number 等）を返す前提
+      const jsonStr = vm.eval('JSON.generate($game.grid_cells.to_a)');
+      const gridState = JSON.parse(jsonStr);
+
+      gridState.forEach(cell => {
+        // セルの座標に対応する <td> 要素を取得
+        const td = document.querySelector(`td[data-x="${cell.x}"][data-y="${cell.y}"]`);
+        if (!td) return;
+
+        // 開封状態の場合の表示
+        if (cell.revealed) {
+          td.classList.add("revealed");
+          if (cell.bomb) {
+            td.classList.add("bomb");
+            td.textContent = "💣";
+          } else {
+            td.textContent = cell.neighbor_bomb_cell_count > 0 ? cell.neighbor_bomb_cell_count : "";
+          }
+          // 開封済みならフラグ状態のクラスは除去
+          td.classList.remove("flagged");
+        }
+        // 未開封の場合の処理
+        else {
+          if (cell.flagged) {
+            td.classList.add("flagged");
+            td.textContent = "🚩";
+          } else {
+            td.classList.remove("flagged");
+            td.textContent = "";
+          }
+        }
+      });
+    }
+
+    // セルを開封する（CLI版の reveal コマンドに相当）
+    function revealCell(x, y) {
+      vm.eval(`$game.reveal_cell(${x}, ${y})`);
+      updateGridUI();
+      checkGameStatus();
+    }
+
+    // セルのフラグをトグルする（CLI版の flag コマンドに相当）
+    function toggleFlag(x, y) {
+      vm.eval(`$game.toggle_flag(${x}, ${y})`);
+      updateGridUI();
+    }
+
+    // ゲーム終了状態をチェックし、メッセージを表示する
+    function checkGameStatus() {
+      const finished = vm.eval("$game.finished?").toString() === "true";
+      if (finished) {
+        updateGridUI();
+        if (vm.eval("$game.grid_cells.bombed?").toString() === "true") {
+          messageDiv.textContent = "爆弾を開いてしまいました…";
+        } else {
+          messageDiv.textContent = "おめでとうございます！全てのセルを開封しました！";
+        }
+      }
+    }
+
+    // 難易度選択ボタンにイベントを設定
+    document.querySelectorAll("#difficulty-selection button").forEach(button => {
+      button.addEventListener("click", (e) => {
+        const difficulty = e.target.dataset.difficulty;
+        startGame(difficulty);
+      });
+    });
+  </script>
+</body>
+</html>
