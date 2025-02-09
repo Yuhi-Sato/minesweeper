@@ -1,13 +1,17 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-Dir.glob(File.expand_path('../domains/validators/*.rb', __dir__)).sort.each do |file|
-  require file
-end
+require_relative 'validators/base'
+require_relative 'validators/cell_validator'
+require_relative 'validators/grid_cells_validator'
+require_relative 'validators/position_validator'
 
-Dir.glob(File.expand_path('../domains/**/*.rb', __dir__)).sort.each do |file|
-  require file
-end
+require_relative 'base'
+require_relative 'cell_with_neighbors'
+require_relative 'cell'
+require_relative 'grid_cells_factory'
+require_relative 'grid_cells'
+require_relative 'position'
 
 def prompt_command
   print "\nコマンドを入力してください（例: reveal 2 3 / flag 1 1 / exit）: "

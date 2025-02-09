@@ -73,6 +73,27 @@ module Domains
       end
     end
 
+    def to_a
+      result = []
+
+      @cells.each_with_index do |row, y|
+        row.each_with_index do |cell, x|
+          result << {
+            x:,
+            y:,
+            revealed: cell.revealed?,
+            flagged: cell.flag?,
+            bomb: cell.bomb?,
+            neighbor_bomb_cell_count: cell.neighbor_bomb_cell_count,
+            count_revealed_cell: cell.count_revealed_cell,
+            neighbors_size: cell.neighbors.size
+          }
+        end
+      end
+
+      result
+    end
+
     with_validation :reveal_cell, :toggle_flag
 
     private
