@@ -1,5 +1,17 @@
 # frozen_string_literal: true
 
+require_relative 'validators/base'
+require_relative 'validators/cell_validator'
+require_relative 'validators/grid_cells_validator'
+require_relative 'validators/position_validator'
+
+require_relative 'base'
+require_relative 'cell_with_neighbors'
+require_relative 'cell'
+require_relative 'grid_cells_factory'
+require_relative 'grid_cells'
+require_relative 'position'
+
 module Domains
   class Minesweeper < Base
     attr_reader :grid_cells
