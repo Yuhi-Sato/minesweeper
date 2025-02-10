@@ -15,8 +15,6 @@ Minesweeper --> Position
 Minesweeper --> GridCellsFactory
 Minesweeper --> grid_cells
 
-GridCellsFactory --> GridCells
-
 GridCells ..|> grid_cells
 GridCells --> position
 
