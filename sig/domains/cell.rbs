@@ -1,0 +1,23 @@
+module Domains
+  class Cell < Base
+    @bomb: untyped
+
+    @flag: untyped
+
+    @revealed: untyped
+
+    def initialize: (bomb: untyped) -> void
+
+    def bomb?: () -> untyped
+
+    def empty?: () -> untyped
+
+    def flag?: () -> untyped
+
+    def revealed?: () -> untyped
+
+    def toggle_flag: () -> untyped
+
+    def reveal: () -> untyped
+  end
+end

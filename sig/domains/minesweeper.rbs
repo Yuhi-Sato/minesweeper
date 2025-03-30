@@ -1,0 +1,27 @@
+module Domains
+  class Minesweeper < Base
+    @grid_cells: untyped
+
+    @finished: untyped
+
+    attr_reader grid_cells: untyped
+
+    EASY: :easy
+
+    NORMAL: :normal
+
+    HARD: :hard
+
+    def initialize: (untyped difficulty) -> void
+
+    def reveal_cell: (untyped x, untyped y) -> untyped
+
+    def toggle_flag: (untyped x, untyped y) -> untyped
+
+    def finished?: () -> untyped
+
+    private
+
+    def check_finish_after_reveal: () -> untyped
+  end
+end

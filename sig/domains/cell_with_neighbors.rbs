@@ -1,0 +1,27 @@
+module Domains
+  class CellWithNeighbors < Base
+    @base: untyped
+
+    @neighbors: untyped
+
+    @neighbor_bomb_cell_count: untyped
+
+    extend Forwardable
+
+    attr_reader neighbor_bomb_cell_count: untyped
+
+    def initialize: (base: untyped, ?neighbors: untyped) -> void
+
+    def neighbors: () -> untyped
+
+    def add_neighbor: (neighbor: untyped) -> untyped
+
+    def reveal_with_neighbors: () -> (nil | untyped)
+
+    def count_revealed_cell: () -> untyped
+
+    private
+
+    def count_neighbor_bomb_cell: () -> untyped
+  end
+end

@@ -1,0 +1,13 @@
+module Domains
+  class Position < Base
+    @x: untyped
+
+    @y: untyped
+
+    attr_reader x: untyped
+
+    attr_reader y: untyped
+
+    def initialize: (x: untyped, y: untyped) -> void
+  end
+end

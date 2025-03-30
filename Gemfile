@@ -7,3 +7,5 @@ gem 'rspec'
 
 gem 'factory_bot', '~> 6.5'
 gem 'simplecov', require: false, group: :test
+gem 'rbs-inline', require: false
+gem 'steep', require: false

@@ -1,0 +1,7 @@
+module Domains
+  module Validators
+    class PositionValidator < Base
+      def validate_initialize!: (x: untyped, y: untyped) -> untyped
+    end
+  end
+end

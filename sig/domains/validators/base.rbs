@@ -1,0 +1,33 @@
+module Domains
+  module Validators
+    class Base
+      @object: untyped
+
+      @errors: untyped
+
+      attr_reader object: untyped
+
+      attr_reader errors: untyped
+
+      def initialize: (untyped domain_object) -> void
+    end
+
+    class Errors
+      @errors: untyped
+
+      def initialize: () -> void
+
+      def add: (untyped message) -> untyped
+
+      def empty?: () -> untyped
+
+      def full_messages: () -> untyped
+    end
+
+    class Error < StandardError
+      @errors: untyped
+
+      def initialize: (untyped errors) -> void
+    end
+  end
+end

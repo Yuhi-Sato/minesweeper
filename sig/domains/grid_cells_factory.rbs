@@ -1,0 +1,11 @@
+module Domains
+  module GridCellsFactory
+    def self.create: (untyped difficulty) -> untyped
+
+    private
+
+    def self.create_by_conditions: (untyped conditions) -> untyped
+
+    def self.coordinations: (x: untyped, y: untyped, width: untyped, height: untyped) -> untyped
+  end
+end

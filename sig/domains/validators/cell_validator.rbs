@@ -1,0 +1,11 @@
+module Domains
+  module Validators
+    class CellValidator < Base
+      extend Forwardable
+
+      def validate_toggle_flag!: () -> untyped
+
+      def validate_reveal!: () -> untyped
+    end
+  end
+end

@@ -1,0 +1,9 @@
+module Domains
+  module Validators
+    class GridCellsValidator < Base
+      def validate_reveal_cell!: (position: untyped) -> untyped
+
+      def validate_toggle_flag!: (position: untyped) -> untyped
+    end
+  end
+end

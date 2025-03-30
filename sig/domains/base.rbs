@@ -1,0 +1,13 @@
+module Domains
+  class Base
+    def self.inherited: (untyped subclass) -> untyped
+
+    module ClassMethods
+      def validator_class: () -> untyped
+
+      def with_validation: (*untyped method_names) -> untyped
+    end
+
+    def self.define_validator_class: (untyped subclass) -> untyped
+  end
+end

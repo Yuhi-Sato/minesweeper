@@ -1,0 +1,32 @@
+module Domains
+  class GridCells < Base
+    @cells: untyped
+
+    @num_empties: untyped
+
+    attr_reader num_empties: untyped
+
+    def initialize: (cells: untyped) -> void
+
+    def reveal_cell: (position: untyped) -> untyped
+
+    def toggle_flag: (position: untyped) -> untyped
+
+    def count_revealed_cell: () -> untyped
+
+    def bombed?: () -> untyped
+
+    def width: () -> untyped
+
+    def height: () -> untyped
+
+    # TODO: 別クラスに実装する
+    def display: () -> untyped
+
+    def to_a: () -> untyped
+
+    private
+
+    def count_empty_cell: () -> untyped
+  end
+end
