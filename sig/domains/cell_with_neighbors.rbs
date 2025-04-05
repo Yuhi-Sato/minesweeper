@@ -1,27 +1,47 @@
+# Generated from domains/cell_with_neighbors.rb with RBS::Inline
+
 module Domains
   class CellWithNeighbors < Base
-    @base: untyped
-
-    @neighbors: untyped
-
-    @neighbor_bomb_cell_count: untyped
-
     extend Forwardable
 
-    attr_reader neighbor_bomb_cell_count: untyped
+    @base: Cell
 
-    def initialize: (base: untyped, ?neighbors: untyped) -> void
+    @neighbors: Array[CellWithNeighbors]
 
-    def neighbors: () -> untyped
+    @neighbor_bomb_cell_count: Integer
 
-    def add_neighbor: (neighbor: untyped) -> untyped
+    attr_reader neighbor_bomb_cell_count: Integer
 
-    def reveal_with_neighbors: () -> (nil | untyped)
+    # @rbs (base: Cell, neighbors: Array[CellWithNeighbors]) -> void
+    def initialize: (base: Cell, neighbors: Array[CellWithNeighbors]) -> void
 
-    def count_revealed_cell: () -> untyped
+    def bomb?: () -> bool
+
+    def empty?: () -> bool
+
+    def flag?: () -> bool
+
+    def revealed?: () -> bool
+
+    def toggle_flag: () -> void
+
+    def reveal: () -> void
+
+    # @rbs () -> Array[CellWithNeighbors]
+    def neighbors: () -> Array[CellWithNeighbors]
+
+    # @rbs (neighbor: CellWithNeighbors) -> void
+    def add_neighbor: (neighbor: CellWithNeighbors) -> void
+
+    # @rbs () -> void
+    def reveal_with_neighbors: () -> void
+
+    # @rbs () -> Integer
+    def count_revealed_cell: () -> Integer
 
     private
 
-    def count_neighbor_bomb_cell: () -> untyped
+    # @rbs () -> Integer
+    def count_neighbor_bomb_cell: () -> Integer
   end
 end
