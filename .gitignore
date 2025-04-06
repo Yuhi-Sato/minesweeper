@@ -3,5 +3,5 @@
 package-lock.json
 package.json
 /er
-rbs_collection.yaml
+rbs_collection.lock.yaml
 /.gem_rbs_collection
