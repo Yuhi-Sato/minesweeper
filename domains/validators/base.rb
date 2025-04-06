@@ -22,8 +22,8 @@ module Domains
         @errors = []
       end
 
-      # @rbs (message: String) -> void
-      def add(message:)
+      # @rbs (String) -> void
+      def add(message)
         @errors << message
       end
 
