@@ -2,6 +2,8 @@ name: Steep
 
 on:
   push:
+    paths:
+    - 'domains/**/*.rb'
     branches: [ main ]
   pull_request:
     branches: [ main ]
