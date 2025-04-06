@@ -4,6 +4,7 @@
 require 'forwardable'
 
 module Domains
+  # @rbs inherits Base
   class CellWithNeighbors < Base
     extend Forwardable
 
@@ -13,10 +14,10 @@ module Domains
 
     attr_reader :neighbor_bomb_cell_count #: Integer
 
-    # @rbs (base: Cell, neighbors: Array[CellWithNeighbors]) -> void
-    def initialize(base:, neighbors:)
+    # @rbs (base: Cell, ?neighbors: Array[CellWithNeighbors]) -> void
+    def initialize(base:, neighbors: [])
       @base = base
-      @neighbors = neighbors || []
+      @neighbors = neighbors
       @neighbor_bomb_cell_count = count_neighbor_bomb_cell
     end
 

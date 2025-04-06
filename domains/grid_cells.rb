@@ -1,39 +1,51 @@
 # frozen_string_literal: true
-
+# rbs_inline: enabled
 module Domains
+  # @rbs inherits Base
   class GridCells < Base
-    attr_reader :num_empties
+    # @rbs @cells: Array[Array[CellWithNeighbors]]
+    # @rbs @num_empties: Integer
 
+    attr_reader :num_empties #: Integer
+
+    # @rbs (cells: Array[Array[CellWithNeighbors]]) -> void
     def initialize(cells:)
       @cells = cells
       @num_empties = count_empty_cell
     end
 
+    # @rbs (position: Position) -> void
     def reveal_cell(position:)
       @cells[position.y][position.x].reveal_with_neighbors
     end
 
+    # @rbs (position: Position) -> void
     def toggle_flag(position:)
       @cells[position.y][position.x].toggle_flag
     end
 
+    # @rbs () -> Integer
     def count_revealed_cell
       @cells.flatten.count(&:revealed?)
     end
 
+    # @rbs () -> bool
     def bombed?
       @cells.flatten.any? { |cell| cell.bomb? && cell.revealed? }
     end
 
+    # @rbs () -> Integer
     def width
       @cells.first.size
     end
 
+    # @rbs () -> Integer
     def height
       @cells.size
     end
 
     # TODO: 別クラスに実装する
+    # @rbs () -> void
     def display
       print '  '
 
@@ -73,8 +85,9 @@ module Domains
       end
     end
 
+    # @rbs () -> Array[Hash[Symbol, untyped]]
     def to_a
-      result = []
+      result = [] #: Array[Hash[Symbol, untyped]]
 
       @cells.each_with_index do |row, y|
         row.each_with_index do |cell, x|
@@ -94,10 +107,13 @@ module Domains
       result
     end
 
+    # @rbs!
+    #   extend Base::ClassMethods
     with_validation :reveal_cell, :toggle_flag
 
     private
 
+    # @rbs () -> Integer
     def count_empty_cell
       @cells.flatten.count(&:empty?)
     end
