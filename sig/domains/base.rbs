@@ -7,7 +7,8 @@ module Domains
     module ClassMethods
       def validator_class: () -> untyped
 
-      def with_validation: (*untyped method_names) -> untyped
+      # @rbs (*Symbol) -> void
+      def with_validation: (*Symbol) -> void
     end
 
     def self.define_validator_class: (untyped subclass) -> untyped

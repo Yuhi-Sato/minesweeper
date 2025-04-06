@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# rbs_inline: enabled
 
 module Domains
   class Base
@@ -12,6 +13,7 @@ module Domains
         @validator_class
       end
 
+      # @rbs (*Symbol) -> void
       def with_validation(*method_names)
         method_names.each do |method_name|
           unless method_defined?(method_name) || private_method_defined?(method_name)
