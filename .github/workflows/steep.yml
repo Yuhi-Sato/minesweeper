@@ -22,5 +22,8 @@ jobs:
       - name: Install dependencies
         run: bundle install --jobs 4 --retry 3
 
+      - name: Generate RBS
+        run: bundle exec rbs-inline domains --output=sig
+
       - name: Run Steep
         run: bundle exec steep check
