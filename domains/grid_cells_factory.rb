@@ -42,8 +42,8 @@ module Domains
         grid_cells.each_with_index do |row, y|
           row.each_with_index do |cell, x|
             neighbor_coordinations(x: x, y: y, width: conditions.width, height: conditions.height).each do |nx, ny|
-              next if nx.nil? || ny.nil?
-
+              # @type var nx: Integer
+              # @type var ny: Integer
               cell.add_neighbor(neighbor: grid_cells[ny][nx])
             end
           end
@@ -59,7 +59,12 @@ module Domains
         dy = [-1, -1, 0, 1, 1, 1, 0, -1]
 
         num_neighbors.times.map { |i| [x + dx[i], y + dy[i]] }
-                     .select { |nx, ny| nx&.between?(0, width - 1) && ny&.between?(0, height - 1) }
+                     .select do |nx, ny|
+                       raise(ArgumentError, "nx is nil") if nx.nil?
+                       raise(ArgumentError, "ny is nil") if ny.nil?
+
+                       nx.between?(0, width - 1) && ny.between?(0, height - 1)
+                     end
       end
     end
   end
