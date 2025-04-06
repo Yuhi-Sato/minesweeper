@@ -1,5 +1,3 @@
-D = Steep::Diagnostic
-
 target :domains do
   signature "sig/domains"
   check "domains"
