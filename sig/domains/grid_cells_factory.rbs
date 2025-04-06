@@ -1,11 +1,25 @@
+# Generated from domains/grid_cells_factory.rb with RBS::Inline
+
 module Domains
   module GridCellsFactory
-    def self.create: (untyped difficulty) -> untyped
+    class Conditions < Struct[Integer]
+      attr_accessor width(): Integer
 
-    private
+      attr_accessor height(): Integer
 
-    def self.create_by_conditions: (untyped conditions) -> untyped
+      attr_accessor num_bombs(): Integer
 
-    def self.coordinations: (x: untyped, y: untyped, width: untyped, height: untyped) -> untyped
+      def self.new: (?Integer width, ?Integer height, ?Integer num_bombs) -> instance
+                  | (?width: Integer, ?height: Integer, ?num_bombs: Integer) -> instance
+    end
+
+    # @rbs (Symbol) -> GridCells
+    def self.create: (Symbol) -> GridCells
+
+    # @rbs (Conditions) -> GridCells
+    private def self.create_by_conditions: (Conditions) -> GridCells
+
+    # @rbs (x: Integer, y: Integer, width: Integer, height: Integer) -> Array[Array[Integer]]
+    private def self.coordinations: (x: Integer, y: Integer, width: Integer, height: Integer) -> Array[Array[Integer]]
   end
 end

@@ -1,13 +1,19 @@
+# Generated from domains/position.rb with RBS::Inline
+
 module Domains
+  # @rbs inherits Base
   class Position < Base
-    @x: untyped
+    @x: Integer
 
-    @y: untyped
+    @y: Integer
 
-    attr_reader x: untyped
+    attr_reader x: Integer
 
-    attr_reader y: untyped
+    attr_reader y: Integer
 
-    def initialize: (x: untyped, y: untyped) -> void
+    # @rbs (x: Integer, y: Integer) -> void
+    def initialize: (x: Integer, y: Integer) -> void
+
+    extend Base::ClassMethods
   end
 end

@@ -1,23 +1,35 @@
+# Generated from domains/cell.rb with RBS::Inline
+
 module Domains
+  # @rbs inherits Base
   class Cell < Base
-    @bomb: untyped
+    @bomb: bool
 
-    @flag: untyped
+    @flag: bool
 
-    @revealed: untyped
+    @revealed: bool
 
-    def initialize: (bomb: untyped) -> void
+    # @rbs (bomb: bool) -> void
+    def initialize: (bomb: bool) -> void
 
-    def bomb?: () -> untyped
+    # @rbs () -> bool
+    def bomb?: () -> bool
 
-    def empty?: () -> untyped
+    # @rbs () -> bool
+    def empty?: () -> bool
 
-    def flag?: () -> untyped
+    # @rbs () -> bool
+    def flag?: () -> bool
 
-    def revealed?: () -> untyped
+    # @rbs () -> bool
+    def revealed?: () -> bool
 
-    def toggle_flag: () -> untyped
+    # @rbs () -> void
+    def toggle_flag: () -> void
 
-    def reveal: () -> untyped
+    # @rbs () -> void
+    def reveal: () -> void
+
+    extend Base::ClassMethods
   end
 end

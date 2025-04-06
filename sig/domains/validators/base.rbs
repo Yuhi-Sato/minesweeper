@@ -1,33 +1,39 @@
+# Generated from domains/validators/base.rb with RBS::Inline
+
 module Domains
   module Validators
     class Base
-      @object: untyped
-
-      @errors: untyped
-
+      # @rbs @object: untyped
+      # @rbs @errors: Errors
       attr_reader object: untyped
 
+      # @rbs @object: untyped
+      # @rbs @errors: Errors
       attr_reader errors: untyped
 
-      def initialize: (untyped domain_object) -> void
+      def initialize: (untyped domain_object) -> untyped
     end
 
     class Errors
-      @errors: untyped
+      @errors: Array[String]
 
-      def initialize: () -> void
+      def initialize: () -> untyped
 
-      def add: (untyped message) -> untyped
+      # @rbs (String) -> void
+      def add: (String) -> void
 
-      def empty?: () -> untyped
+      # @rbs () -> bool
+      def empty?: () -> bool
 
-      def full_messages: () -> untyped
+      # @rbs () -> String
+      def full_messages: () -> String
     end
 
     class Error < StandardError
-      @errors: untyped
+      @errors: Errors
 
-      def initialize: (untyped errors) -> void
+      # @rbs (Errors) -> void
+      def initialize: (Errors) -> void
     end
   end
 end

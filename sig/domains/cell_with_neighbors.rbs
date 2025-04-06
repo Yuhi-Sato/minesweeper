@@ -1,6 +1,7 @@
 # Generated from domains/cell_with_neighbors.rb with RBS::Inline
 
 module Domains
+  # @rbs inherits Base
   class CellWithNeighbors < Base
     extend Forwardable
 
@@ -12,8 +13,8 @@ module Domains
 
     attr_reader neighbor_bomb_cell_count: Integer
 
-    # @rbs (base: Cell, neighbors: Array[CellWithNeighbors]) -> void
-    def initialize: (base: Cell, neighbors: Array[CellWithNeighbors]) -> void
+    # @rbs (base: Cell, ?neighbors: Array[CellWithNeighbors]) -> void
+    def initialize: (base: Cell, ?neighbors: Array[CellWithNeighbors]) -> void
 
     def bomb?: () -> bool
 

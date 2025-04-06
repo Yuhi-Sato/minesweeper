@@ -1,32 +1,49 @@
+# Generated from domains/grid_cells.rb with RBS::Inline
+
+# frozen_string_literal: true
+# rbs_inline: enabled
 module Domains
+  # @rbs inherits Base
   class GridCells < Base
-    @cells: untyped
+    @cells: Array[Array[CellWithNeighbors]]
 
-    @num_empties: untyped
+    @num_empties: Integer
 
-    attr_reader num_empties: untyped
+    attr_reader num_empties: Integer
 
-    def initialize: (cells: untyped) -> void
+    # @rbs (cells: Array[Array[CellWithNeighbors]]) -> void
+    def initialize: (cells: Array[Array[CellWithNeighbors]]) -> void
 
-    def reveal_cell: (position: untyped) -> untyped
+    # @rbs (position: Position) -> void
+    def reveal_cell: (position: Position) -> void
 
-    def toggle_flag: (position: untyped) -> untyped
+    # @rbs (position: Position) -> void
+    def toggle_flag: (position: Position) -> void
 
-    def count_revealed_cell: () -> untyped
+    # @rbs () -> Integer
+    def count_revealed_cell: () -> Integer
 
-    def bombed?: () -> untyped
+    # @rbs () -> bool
+    def bombed?: () -> bool
 
-    def width: () -> untyped
+    # @rbs () -> Integer
+    def width: () -> Integer
 
-    def height: () -> untyped
+    # @rbs () -> Integer
+    def height: () -> Integer
 
     # TODO: 別クラスに実装する
-    def display: () -> untyped
+    # @rbs () -> void
+    def display: () -> void
 
-    def to_a: () -> untyped
+    # @rbs () -> Array[Hash[Symbol, untyped]]
+    def to_a: () -> Array[Hash[Symbol, untyped]]
+
+    extend Base::ClassMethods
 
     private
 
-    def count_empty_cell: () -> untyped
+    # @rbs () -> Integer
+    def count_empty_cell: () -> Integer
   end
 end

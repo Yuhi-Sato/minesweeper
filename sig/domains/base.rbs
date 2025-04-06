@@ -1,3 +1,5 @@
+# Generated from domains/base.rb with RBS::Inline
+
 module Domains
   class Base
     def self.inherited: (untyped subclass) -> untyped

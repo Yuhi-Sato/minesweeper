@@ -1,7 +1,11 @@
+# Generated from domains/validators/cell_validator.rb with RBS::Inline
+
 module Domains
   module Validators
     class CellValidator < Base
       extend Forwardable
+
+      def revealed?: () -> bool
 
       def validate_toggle_flag!: () -> untyped
 
