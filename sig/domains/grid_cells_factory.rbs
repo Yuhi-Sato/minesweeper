@@ -20,6 +20,6 @@ module Domains
     private def self.create_by_conditions: (Conditions) -> GridCells
 
     # @rbs (x: Integer, y: Integer, width: Integer, height: Integer) -> Array[Array[Integer]]
-    private def self.coordinations: (x: Integer, y: Integer, width: Integer, height: Integer) -> Array[Array[Integer]]
+    private def self.neighbor_coordinations: (x: Integer, y: Integer, width: Integer, height: Integer) -> Array[Array[Integer]]
   end
 end

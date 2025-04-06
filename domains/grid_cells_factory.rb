@@ -41,7 +41,7 @@ module Domains
         grid_cells = cells.shuffle.each_slice(conditions.width).to_a
         grid_cells.each_with_index do |row, y|
           row.each_with_index do |cell, x|
-            coordinations(x: x, y: y, width: conditions.width, height: conditions.height).each do |nx, ny|
+            neighbor_coordinations(x: x, y: y, width: conditions.width, height: conditions.height).each do |nx, ny|
               next if nx.nil? || ny.nil?
 
               cell.add_neighbor(neighbor: grid_cells[ny][nx])
@@ -53,7 +53,7 @@ module Domains
       end
 
       # @rbs (x: Integer, y: Integer, width: Integer, height: Integer) -> Array[Array[Integer]]
-      def coordinations(x:, y:, width:, height:)
+      def neighbor_coordinations(x:, y:, width:, height:)
         num_neighbors = 8
         dx = [0, 1, 1, 1, 0, -1, -1, -1]
         dy = [-1, -1, 0, 1, 1, 1, 0, -1]
